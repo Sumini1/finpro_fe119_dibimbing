@@ -36,6 +36,7 @@ const ModalCreateActivity = ({ isModalOpen, toggleModal }) => {
     }));
   };
 
+  // mengganti file image menjadi array of files
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setFileImages(files);
@@ -147,7 +148,8 @@ const ModalCreateActivity = ({ isModalOpen, toggleModal }) => {
                 type="file"
                 id="imageUrls"
                 name="imageUrls"
-                onChange={(e) => setFileImage(e.target.files[0])}
+                // onChange={(e) => setFileImage(e.target.files[0])}
+                onChnage={handleImageChange}
                 className="w-full p-1"
               />
             </div>

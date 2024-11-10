@@ -25,7 +25,6 @@ export const fetchLogin = createAsyncThunk(
       Swal.fire({
         title: "Login Successfully",
         icon: "success",
-        // text: data.message,
         showConfirmButton: true,
       });
       return data;
@@ -33,21 +32,28 @@ export const fetchLogin = createAsyncThunk(
       Swal.fire({
         title: "Login Failed",
         icon: "error",
-        // text: error.message,
         showConfirmButton: true,
       });
+      throw error;
     }
   }
 );
+
 const loginSlice = createSlice({
   name: "login",
   initialState: {
     isLoading: false,
+    isLoggedIn: !!localStorage.getItem("accessToken"),
     isSuccess: false,
     isError: false,
     message: "",
   },
-  reducers: {},
+  reducers: {
+    setLoggedOut: (state) => {
+      state.isLoggedIn = false;
+      localStorage.removeItem("accessToken");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchLogin.pending, (state) => {
@@ -56,6 +62,7 @@ const loginSlice = createSlice({
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.isLoggedIn = true;
         state.isError = false;
         state.message = action.payload.message;
       })
@@ -67,4 +74,5 @@ const loginSlice = createSlice({
   },
 });
 
+export const { setLoggedOut } = loginSlice.actions;
 export default loginSlice.reducer;

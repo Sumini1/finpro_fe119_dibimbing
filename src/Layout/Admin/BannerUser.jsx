@@ -13,6 +13,7 @@ const BannerUser = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalUpdateBanner, setIsModalUpdateBanner] = useState(false);
   const [updateBanner, setUpdateBanner] = useState(null);
+  
 
   const handleDeleteBanner = (id) => {
     Swal.fire({
@@ -66,13 +67,7 @@ const BannerUser = () => {
       <h1 className="py-5 font-['Roboto Condensed'] text-md">
         Halaman Banner User
       </h1>
-      <button
-        className="mb-4 font-medium text-blue-600 dark:text-blue-500 hover:underline"
-        onClick={() => toggleModal()}
-      >
-        Create Banner
-      </button>
-
+    
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

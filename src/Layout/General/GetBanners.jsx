@@ -3,17 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchGetBanners } from "../../reducer/bannerSlice";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { RiArrowGoForwardLine } from "react-icons/ri";
 import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import { RiArrowGoBackLine } from "react-icons/ri";
 
 const GetBanners = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const [currentIndex, setCurrentIndex] = useState(0); // State untuk menyimpan indeks slide saat ini
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     dispatch(fetchGetBanners());
@@ -38,7 +39,7 @@ const GetBanners = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative bg-blue-500">
       <TECarousel showControls={false} showIndicators={false} ride="carousel">
         <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
           {data && data.length > 0 ? (
@@ -51,17 +52,20 @@ const GetBanners = () => {
                 } -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none`}
               >
                 <Link to={`/banner/${banner.id}`}>
-                  <img
-                    src={banner.imageUrl}
-                    className="block w-full h-screen p-5"
-                    alt={banner.name}
-                  />
+                  <div className="overflow-hidden rounded-md ">
+                    <img
+                      src={banner.imageUrl}
+                      className="block w-full h-[300px] rounded-md md:h-[500px]"
+                      alt={banner.name}
+                    />
+                  </div>
                 </Link>
-                <div className="absolute hidden p-5 mx-10 text-left text-white bottom-5 md:block">
-                  <p className="text-3xl font-extrabold mt-[-100px] mb-5">
+                {/* Deskripsi Banner */}
+                <div className="absolute top-0 p-5 mb-2 text-left text-white mt-36 left-5 md:block md:top-36 md:text-xl">
+                  <p className="mb-3 text-xl font-extrabold md:text-3xl md:mb-5">
                     Lets Explore The World
                   </p>
-                  <button className="px-4 py-2 font-bold text-black bg-white rounded">
+                  <button className="px-4 py-2 mb-2 font-bold text-black bg-white rounded md:mb-7">
                     Book Now
                   </button>
                 </div>
@@ -74,28 +78,23 @@ const GetBanners = () => {
       </TECarousel>
 
       {/* Kontrol Panah */}
-      <div className="absolute left-0 transform -translate-y-1/2 top-1/2">
+
+      <div className="absolute left-12  md:left-10 transform -translate-y-1/2 top-[270px] md:top-[450px]">
         <button
           className="bg-transparent border-0"
           aria-label="Previous"
           onClick={handlePrev}
         >
-          <FontAwesomeIcon
-            icon={faChevronLeft}
-            className="p-10 text-2xl font-extrabold text-white"
-          />
+          <RiArrowGoBackLine className="text-2xl font-extrabold text-white md:text-4xl" />
         </button>
       </div>
-      <div className="absolute right-0 transform -translate-y-1/2 top-1/2">
+      <div className="absolute left-24  transform -translate-y-1/2 top-[270px] md:top-[450px]">
         <button
           className="bg-transparent border-0"
           aria-label="Next"
           onClick={handleNext}
         >
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            className="p-10 text-2xl font-extrabold text-white"
-          />
+          <RiArrowGoForwardLine className="text-2xl font-extrabold text-white md:text-4xl" />
         </button>
       </div>
     </div>

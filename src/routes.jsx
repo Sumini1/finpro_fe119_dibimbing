@@ -18,6 +18,9 @@ import Sidebar from "./Layout/Admin/Sidebar";
 import PromoAdmin from "./Layout/Admin/PromoAdmin";
 import CategoryAdmin from "./Layout/Admin/CategoryAdmin";
 import ActivitiesAdmin from "./Layout/Admin/ActivitiesAdmin";
+import PaymentMethod from "./Layout/User/PaymentMethod";
+import ListPromo from "./Layout/General/ListPromo";
+import ListCategory from "./Layout/General/ListCategory";
 
 export const routes = [
   {
@@ -49,7 +52,7 @@ export const routes = [
     ),
   },
   {
-    path: "/loggeduser",
+    path: "/logged-user",
     element: <LoggedUser />,
   },
   {
@@ -116,4 +119,16 @@ export const routes = [
       </Sidebar>
     ),
   },
+  {
+    path: "/payment-method",
+    element: <PaymentMethod />,
+  },
+  {
+    path: "/list-promo",
+    element: <ListPromo />,
+  },
+  {
+    path: "/list-category",
+    element: <ListCategory />,
+  }
 ];

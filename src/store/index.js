@@ -20,6 +20,9 @@ import deletePromoReducer from "../reducer/deletePromoSlice";
 import createCategoryReducer from "../reducer/createCategorySlice";
 import updateCategoryReducer from "../reducer/updateCategorySlice";
 import createActivityReducer from "../reducer/createActivitySlice";
+import deleteActivityReducer from "../reducer/deleteActivitySlice";
+import paymentMethodReducer from "../reducer/paymentMethodSlice";
+import logoutReducer from "../reducer/logoutSlice";
 
 export const store = configureStore({
   reducer: {
@@ -44,5 +47,8 @@ export const store = configureStore({
     createCategory: createCategoryReducer,
     updateCategory: updateCategoryReducer,
     createActivity: createActivityReducer,
+    deleteActivity: deleteActivityReducer,
+    paymentMethod: paymentMethodReducer,
+    logout: logoutReducer,
   },
 });

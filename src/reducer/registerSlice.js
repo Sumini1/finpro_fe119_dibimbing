@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Swal from "sweetalert2";
 
+// Thunk untuk proses registrasi pengguna
 export const fetchRegister = createAsyncThunk(
   "register/fetchRegister",
   async (userData) => {
@@ -17,12 +18,13 @@ export const fetchRegister = createAsyncThunk(
         }
       );
       const data = await response.json();
+      console.log("Response", data);
 
       if (data.code !== "200") {
         throw new Error(data.message);
       }
       Swal.fire({
-        title: "register Successfully",
+        title: "Register Successfully",
         icon: "success",
         text: data.message,
         showConfirmButton: true,
@@ -32,7 +34,7 @@ export const fetchRegister = createAsyncThunk(
     } catch (error) {
       console.log("Error pada try catch", error);
       Swal.fire({
-        title: "register Failed",
+        title: "Register Failed",
         icon: "error",
         text: error.message,
         showConfirmButton: true,
@@ -47,6 +49,7 @@ const registerSlice = createSlice({
   initialState: {
     isLoading: false,
     isSuccess: false,
+    avatarUrl: localStorage.getItem("avatarUrl") || "",
     isError: false,
     message: "",
   },
@@ -61,12 +64,24 @@ const registerSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
+
+        // Mengambil avatar URL dari respons dan menyimpannya di localStorage
+        const avatarUrl =
+          action.payload.data?.avatarUrl ||
+          action.payload.data?.user?.avatarUrl;
+        if (avatarUrl) {
+          state.avatarUrl = avatarUrl;
+          localStorage.setItem("avatarUrl", avatarUrl);
+        } else {
+          console.error("Avatar URL tidak ditemukan pada payload.");
+        }
       })
       .addCase(fetchRegister.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.error.message;
+        state.avatarUrl = "";
       });
   },
 });
