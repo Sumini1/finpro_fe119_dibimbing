@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         roboto: ["'Roboto Condensed'", "sans-serif"],
         itim: ["'Itim'", "cursive"],
+        edu: ["'Edu AU VIC WA NT Pre'", "cursive"],
       },
     },
   },

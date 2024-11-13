@@ -61,7 +61,7 @@ const ModalCreateBanner = ({ isModalOpen, toggleModal}) => {
     .unwrap()
     .then(() => {
       dispatch(fetchGetBanners());
-      navigate("/banners");
+      // navigate("/banners");
       toggleModal();
     })
     .catch((error) => {

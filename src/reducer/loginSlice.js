@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 export const fetchLogin = createAsyncThunk(
   "login/fetchLogin",
-  async (userData) => {
+  async (userData, { rejectWithValue }) => {
     try {
       const response = await fetch(
         "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/login",
@@ -16,17 +16,21 @@ export const fetchLogin = createAsyncThunk(
           body: JSON.stringify(userData),
         }
       );
+
       const data = await response.json();
+
+      if (data.code !== "200" || !data.token) {
+        throw new Error(data.message || "Login failed");
+      }
+
       localStorage.setItem("accessToken", data.token);
 
-      if (data.code !== "200") {
-        throw new Error(data.message);
-      }
       Swal.fire({
         title: "Login Successfully",
         icon: "success",
         showConfirmButton: true,
       });
+
       return data;
     } catch (error) {
       Swal.fire({
@@ -34,7 +38,7 @@ export const fetchLogin = createAsyncThunk(
         icon: "error",
         showConfirmButton: true,
       });
-      throw error;
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -58,6 +62,8 @@ const loginSlice = createSlice({
     builder
       .addCase(fetchLogin.pending, (state) => {
         state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -69,7 +75,7 @@ const loginSlice = createSlice({
       .addCase(fetchLogin.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.error.message;
+        state.message = action.payload || action.error.message;
       });
   },
 });

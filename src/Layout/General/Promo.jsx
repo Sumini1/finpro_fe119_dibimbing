@@ -20,7 +20,7 @@ const Promo = () => {
     return <div>Error: {message}</div>;
   }
   return (
-    <div className="grid py-10 bg-blue-500 md:p-16">
+    <div className="grid py-10 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-16">
       <div className="text-white font-['Itim'] mx-5 text-2xl">
         <div className="flex gap-1 mb-3">
           <MdOutlineDiscount />

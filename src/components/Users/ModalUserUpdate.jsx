@@ -64,7 +64,7 @@ const ModalUserUpdate = ({ isModalOpen, toggleModal, user }) => {
         .unwrap()
         .then(() => {
           dispatch(fetchGetAllUsers());
-          navigate("/alluser");
+          // navigate("/alluser");
           toggleModal();
         });
     } catch (error) {

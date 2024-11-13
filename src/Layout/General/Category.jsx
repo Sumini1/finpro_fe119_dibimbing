@@ -22,7 +22,7 @@ const Category = () => {
   }
 
   return (
-    <div className="p-5 py-5 bg-blue-500 md:p-20 md:mt-[-20px]">
+    <div className="p-5 py-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-20 md:mt-[-20px]">
       <div className="flex gap-2 text-xl text-white md:text-2xl">
         <MdCategory />
         <h1>Category</h1>
@@ -33,7 +33,7 @@ const Category = () => {
       <div className="flex overflow-x-auto space-x-7">
         {data.map((category) => (
           <div key={category.id} className="flex-shrink-0 py-5 ">
-            <h2 className="justify-center w-[130px] px-4 py-2 mb-3 text-md text-center text-white bg-blue-600 rounded-full i-tems-center whitespace-nowrap md:mb-3">
+            <h2 className="justify-center w-[130px] px-4 py-2 mb-3 text-md text-center text-white bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 rounded-full i-tems-center whitespace-nowrap md:mb-3">
               {category.name}
             </h2>
             <Link to={`/category/${category.id}`}>
@@ -47,7 +47,7 @@ const Category = () => {
         ))}
       </div>
       <Link to={"/list-category"}>
-        <button className="flex items-center justify-center w-[150px] mx-auto text-center text-white bg-blue-600 rounded-full p-2 md:mt-7">
+        <button className="flex items-center justify-center w-[150px] mx-auto text-center text-white bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 rounded-full p-2 md:mt-7">
           List Category
         </button>
       </Link>

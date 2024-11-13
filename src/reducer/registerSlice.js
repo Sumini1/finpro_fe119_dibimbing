@@ -49,7 +49,6 @@ const registerSlice = createSlice({
   initialState: {
     isLoading: false,
     isSuccess: false,
-    avatarUrl: localStorage.getItem("avatarUrl") || "",
     isError: false,
     message: "",
   },
@@ -64,24 +63,12 @@ const registerSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = action.payload.message;
-
-        // Mengambil avatar URL dari respons dan menyimpannya di localStorage
-        const avatarUrl =
-          action.payload.data?.avatarUrl ||
-          action.payload.data?.user?.avatarUrl;
-        if (avatarUrl) {
-          state.avatarUrl = avatarUrl;
-          localStorage.setItem("avatarUrl", avatarUrl);
-        } else {
-          console.error("Avatar URL tidak ditemukan pada payload.");
-        }
       })
       .addCase(fetchRegister.rejected, (state, action) => {
         state.isLoading = false;
         state.isSuccess = false;
         state.isError = true;
         state.message = action.error.message;
-        state.avatarUrl = "";
       });
   },
 });

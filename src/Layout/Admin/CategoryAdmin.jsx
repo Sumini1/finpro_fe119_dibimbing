@@ -5,6 +5,8 @@ import ModalCreateCategory from "../../components/Category/ModalCreateCategory";
 import ModalUpdateCategory from "../../components/Category/ModalUpdateCategory";
 import { fetchDeleteCategory } from "../../reducer/deleteCategorySlice";
 import Swal from "sweetalert2";
+import { MdCreate } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const CategoryAdmin = () => {
   const dispatch = useDispatch();
@@ -71,10 +73,20 @@ const CategoryAdmin = () => {
       <h1 className="py-5 font-['Roboto Condensed'] text-md">
         Halaman Category
       </h1>
+      <div
+        onClick={() => toggleModal()}
+        className="flex items-end w-full gap-2 mb-5 mr-10 rounded-md text-end"
+      >
+        <button className="flex items-center">Create</button>
+        <MdCreate className="relative top-[-5px]" />
+      </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left text-white">
+          <thead className="text-xs font-bold text-white uppercase bg-gradient-to-tr from-blue-800 via-blue-700 to-blue-800">
             <tr>
+              <th scope="col" className="px-6 py-3">
+                No
+              </th>
               <th scope="col" className="px-6 py-3">
                 Name
               </th>
@@ -90,34 +102,37 @@ const CategoryAdmin = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((category) => (
+            {data.map((category, index) => (
               <tr
                 key={category.id}
-                className="border-b odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700"
+                className={` ${
+                  index % 2 === 0
+                    ? "bg-gradient-to-tr from-blue-900 via-blue-700 to-blue-900"
+                    : "bg-gradient-to-tr from-blue-900 via-blue-700 to-blue-900"
+                }`}
               >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
+                <th>
+                  <p className="px-6 py-4">{index + 1}</p>
+                </th>
+                <th scope="row" className="px-6 py-4 font-medium text-white">
                   {category.name}
                 </th>
                 <td className="px-6 py-4">{category.createdAt}</td>
                 <td className="px-6 py-4">{category.updatedAt}</td>
                 <td className="flex gap-4 px-6 py-4">
+                  <Link to={`/detail-category/${category.id}`}>
+                    <button className="font-medium text-white hover:underline">
+                      Detail
+                    </button>
+                  </Link>
                   <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    onClick={() => toggleModal()}
-                  >
-                    Create
-                  </button>
-                  <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    className="font-medium text-white hover:underline"
                     onClick={() => handleUpdateCategory(category)} // Mengirim category yang dipilih
                   >
                     Update
                   </button>
                   <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    className="font-medium text-white hover:underline"
                     onClick={() => handleDeleteCategory(category.id)}
                   >
                     Delete

@@ -39,7 +39,7 @@ const GetBanners = () => {
   };
 
   return (
-    <div className="relative bg-blue-500">
+    <div className="relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
       <TECarousel showControls={false} showIndicators={false} ride="carousel">
         <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
           {data && data.length > 0 ? (

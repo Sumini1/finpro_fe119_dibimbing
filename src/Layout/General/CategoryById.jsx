@@ -12,15 +12,19 @@ const CategoryById = () => {
         dispatch(fetchGetCategoryById(id));
     }, [id, dispatch]); 
     return (
-      <div className="min-h-screen p-5 text-white bg-blue-500">
-        <div className='flex flex-col mx-auto'>
-          <h1 className=''>Category with ID: {id}</h1>
+      <div className="min-h-screen p-5 text-white bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
+        <div className="flex flex-col mx-auto">
+          <h1 className="">Category with ID: {id}</h1>
           {isLoading && <p>Loading...</p>}
           {message && <p>Error: {message}</p>}
           {data ? (
             <>
               <h2 className="mb-5">Name : {data.name}</h2>
-              <img src={data.imageUrl} alt={data.name} className="rounded-md md:w-[500px]" />
+              <img
+                src={data.imageUrl}
+                alt={data.name}
+                className="rounded-md md:w-[500px]"
+              />
             </>
           ) : (
             <p>No category found.</p>

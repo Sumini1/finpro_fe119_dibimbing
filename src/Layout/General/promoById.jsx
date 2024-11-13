@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchGetPromoById } from "../../reducer/promoByIdSlice";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { fetchAddToCart } from "../../reducer/addToCartSlice"; // Use fetchAddToCart instead
+import { useParams, Link } from "react-router-dom";
 
 const PromoById = () => {
   const { id } = useParams();
@@ -13,7 +13,6 @@ const PromoById = () => {
     dispatch(fetchGetPromoById(id));
   }, [id, dispatch]);
 
-  // Fungsi untuk memformat angka menjadi IDR
   const formatToIDR = (amount) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -21,8 +20,14 @@ const PromoById = () => {
     }).format(amount);
   };
 
+  const handleClaimPromo = () => {
+    if (data) {
+      dispatch(fetchAddToCart(data)); // Dispatch the API call action to add promo to cart
+    }
+  };
+
   return (
-    <div className="min-h-screen p-4 bg-blue-500 md:p-10">
+    <div className="min-h-screen p-4 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-10">
       <div className="text-lg text-white">
         {isLoading && <p>Loading...</p>}
         {message && <p>Error: {message}</p>}
@@ -50,7 +55,10 @@ const PromoById = () => {
                   data?.minimum_claim_price
                 )}`}</p>
                 <div className="flex flex-col items-center mt-5 md:items-start">
-                  <button className="w-[150px] mt-5 bg-blue-600 rounded-full text-center py-2">
+                  <button
+                    onClick={handleClaimPromo}
+                    className="w-[150px] mt-5 bg-blue-600 rounded-full text-center py-2"
+                  >
                     Claim Now
                   </button>
                   <Link to="/list-promo">

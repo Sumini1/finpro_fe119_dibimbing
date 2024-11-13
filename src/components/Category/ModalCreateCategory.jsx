@@ -70,10 +70,12 @@ const ModalCreateCategory = ({ isModalOpen, toggleModal }) => {
         ...formData,
         imageUrl, // Menyertakan URL gambar yang diupload
       };
-      dispatch(fetchCreateCategory(categoryData));
-      dispatch(fetchGetCategories());
-      navigate("/category");
-      toggleModal();
+      dispatch(fetchCreateCategory(categoryData))
+        .unwrap()
+        .then(() => {
+          dispatch(fetchGetCategories());
+          toggleModal();
+        });
     } catch (error) {
       setErrorMessage(
         "Error uploading image or creating category. Please try again."

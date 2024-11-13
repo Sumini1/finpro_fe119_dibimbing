@@ -8,7 +8,6 @@ import AllUser from "./Layout/Admin/AllUser";
 import LoggedUser from "./Layout/User/Users/LoggedUser";
 import Promo from "./Layout/General/Promo";
 import PromoById from "./Layout/General/PromoById";
-import ModalUserUpdate from "./components/Users/ModalUserUpdate";
 import BannerUser from "./Layout/Admin/BannerUser";
 import Category from "./Layout/General/Category";
 import CategoryById from "./Layout/General/CategoryById";
@@ -21,6 +20,12 @@ import ActivitiesAdmin from "./Layout/Admin/ActivitiesAdmin";
 import PaymentMethod from "./Layout/User/PaymentMethod";
 import ListPromo from "./Layout/General/ListPromo";
 import ListCategory from "./Layout/General/ListCategory";
+import DetailBannerAdmin from "./Layout/Admin/DetailBannerAdmin";
+import DetailPromoAdmin from "./Layout/Admin/DetailPromoAdmin";
+import DetailCategoryAdmin from "./Layout/Admin/DetailCategoryAdmin";
+import DetailActivityAdmin from "./Layout/Admin/DetailActivityAdmin";
+import CartPage from "./Layout/User/Users/CartPage";
+import ErrorPage from "./pages/ErrorPage";
 
 export const routes = [
   {
@@ -63,10 +68,6 @@ export const routes = [
     path: "/promo/:id",
     element: <PromoById />,
   },
-  // {
-  //   path : "/update-user",
-  //   element : <ModalUserUpdate />
-  // }
   {
     path: "/banner-user",
     element: (
@@ -130,5 +131,29 @@ export const routes = [
   {
     path: "/list-category",
     element: <ListCategory />,
+  },
+  {
+path: "/detail-banner/:id",
+    element: <DetailBannerAdmin />,
+  },
+  {
+    path: "/detail-promo/:id",
+    element: <DetailPromoAdmin />,
+  },
+  {
+    path: "/detail-category/:id",
+    element: <DetailCategoryAdmin />,
+  },
+  {
+    path: "/detail-activity/:id",
+    element: <DetailActivityAdmin />,
+  },
+  {
+    path: "/cart",
+    element: <CartPage />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   }
 ];

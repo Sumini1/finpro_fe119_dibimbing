@@ -21,7 +21,7 @@ const ActivityId = () => {
   };
 
   return (
-    <div className="min-h-screen p-10 text-white bg-blue-500">
+    <div className="min-h-screen p-10 text-white bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
       <h1 className="text-xl">Activity with ID: {id}</h1>
       {isLoading && <p>Loading...</p>}
       {message && <p>Error: {message}</p>}
@@ -31,7 +31,7 @@ const ActivityId = () => {
           <img src={data.category.imageUrl} alt={data.category.name} /> */}
           <h3 className="mb-3 text-xl">Title: {data.title}</h3>
           <p>{`Price : ${formatToIDR(data.price)}`}</p>
-          <p className="mb-3 text-lg">Description: {data.description}</p>
+          <p className="w-full mb-3 text-lg md:w-[500px]">Description: {data.description}</p>
           {data.imageUrls && data.imageUrls.length > 0 && (
             <div>
               <h4 className="mb-2 text-xl">Images:</h4>
@@ -43,14 +43,14 @@ const ActivityId = () => {
                   className="w-full h-full rounded-lg md:w-[500px]"
                 />
               ))}
-              <div className="flex flex-col items-center justify-center mx-auto md:text-lg md:flex-row md:gap-2 md:mx-6">
+              <div className="flex gap-5 mx-4 mt-5 md:text-lg md:flex-row md:gap-2 md:mx-10">
                 <Link to={"/"}>
-                  <button className="flex justify-center items-center mt-5 bg-blue-600 w-[150px] rounded-full text-center mb-2 md:mx-6">
+                  <button className="flex p-1 justify-center mt-5 bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 w-[130px] rounded-full text-center mb-2 md:mx-6">
                     Back To Home
                   </button>
                 </Link>
                 <Link to={"/add-to-cart"}>
-                  <button className="flex justify-center items-center mt-5 bg-blue-600 w-[150px] rounded-full text-center mb-2 md:mx-6">
+                  <button className="flex justify-center p-1  mt-5 bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 w-[130px] rounded-full text-center mb-2 md:mx-6">
                     Add To Cart
                   </button>
                 </Link>

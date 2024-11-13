@@ -19,8 +19,10 @@ const ListPromo = () => {
     return <div>Error: {message}</div>;
   }
   return (
-    <div className="grid py-10 bg-blue-500">
-        <h1 className="text-white font-['Itim'] mx-10 text-2xl">List Semua Promo</h1>
+    <div className="grid py-10 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
+      <h1 className="text-white font-['Itim'] mx-10 text-2xl">
+        List Semua Promo
+      </h1>
       <div className="grid grid-cols-1 gap-5 p-10 text-white md:grid-cols-3">
         {data.map((promo) => (
           <div key={promo.id} className="shadow-lg h-[300px] rounded-md">
@@ -39,7 +41,7 @@ const ListPromo = () => {
       </div>
       <div className="flex items-center justify-center mt-2 ">
         <Link to={"/"}>
-          <button className="font-['Itim'] text-xl bg-blue-600 text-white w-[200px] items-center p-1 rounded-full">
+          <button className="font-['Itim'] text-xl bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 text-white w-[200px] items-center p-1 rounded-full">
             Back to Home
           </button>
         </Link>

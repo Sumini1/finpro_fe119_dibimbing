@@ -13,7 +13,7 @@ const BannerById = () => {
   }, [dispatch, id]);
 
   return (
-    <div className="min-h-screen p-10 bg-blue-500">
+    <div className="min-h-screen p-10 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
       <div className="flex flex-col items-center justify-center mx-auto text-lg text-white md:text-xl">
         <h1>Banner with ID: {id}</h1>
         {isLoading && <p>Loading...</p>}
@@ -27,8 +27,6 @@ const BannerById = () => {
               className="w-full h-auto rounded-lg md:w-[500px]"
             />
             <div className="flex flex-col gap-2 mt-5">
-
-
               <Link to={"/"}>
                 <button className="w-[150px] mt-1 mb-5 bg-blue-600 rounded-full md:w-[300px] flex mx-auto items-center text-center justify-center p-1">
                   Back to Home

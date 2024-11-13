@@ -19,7 +19,7 @@ const ListCategory = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen p-5 py-5 text-lg bg-blue-500 md:p-10 ">
+    <div className="flex flex-col min-h-screen p-5 py-5 text-lg bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-10 ">
       <h1 className="text-white font-['Itim'] text-2xl py-5 p-5">
         List Category
       </h1>
@@ -37,7 +37,7 @@ const ListCategory = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-5 text-white bg-blue-600 w-[200px] rounded-full mx-auto">
+      <div className="flex justify-center mt-5 text-white bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 w-[200px] rounded-full mx-auto">
         <Link to={"/"}>
           <button>Back To Home</button>
         </Link>

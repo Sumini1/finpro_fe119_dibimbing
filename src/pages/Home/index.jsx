@@ -6,6 +6,7 @@ import Category from "../../Layout/General/Category";
 import Activity from "../../Layout/General/Activity";
 import Faq from "../../components/General/Faq";
 import Footer from "../../components/General/Footer";
+// import ErrorPage from "../ErrorPage";
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
             <Activity />
             <Faq />
             <Footer />
+            {/* <ErrorPage /> */}
         </div>
     );
 };

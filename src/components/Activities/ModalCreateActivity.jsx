@@ -76,10 +76,13 @@ const ModalCreateActivity = ({ isModalOpen, toggleModal }) => {
         total_reviews: parseInt(formData.total_reviews, 10),
       };
 
-      dispatch(fetchCreateActivity(activityData));
-      dispatch(fetchActivity());
-    //   navigate("/activity");
-      toggleModal();
+      dispatch(fetchCreateActivity(activityData))
+        .unwrap()
+        .then(() => {})
+        .then(() => {
+          dispatch(fetchActivity());
+          toggleModal();
+        });
     } catch (error) {
       setErrorMessage("Failed to upload images or create activity.");
     }

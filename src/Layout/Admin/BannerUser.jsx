@@ -4,7 +4,9 @@ import { fetchGetBanners } from "../../reducer/bannerSlice";
 import ModalCreateBanner from "../../components/Banner/ModalCreateBanner";
 import UpdateBanner from "../../components/Banner/UpdateBanner";
 import { fetchDeleteBanner } from "../../reducer/deleteBannerSlice";
+import { MdCreate } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const BannerUser = () => {
   const dispatch = useDispatch();
@@ -13,12 +15,11 @@ const BannerUser = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalUpdateBanner, setIsModalUpdateBanner] = useState(false);
   const [updateBanner, setUpdateBanner] = useState(null);
-  
 
   const handleDeleteBanner = (id) => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You want to delete this banner?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -50,8 +51,7 @@ const BannerUser = () => {
   useEffect(() => {
     dispatch(fetchGetBanners());
   }, [dispatch]);
-
-  // Refresh data banners setelah delete berhasil
+  
   useEffect(() => {
     if (deleteStatus === "succeeded") {
       dispatch(fetchGetBanners());
@@ -65,13 +65,23 @@ const BannerUser = () => {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
       <h1 className="py-5 font-['Roboto Condensed'] text-md">
-        Halaman Banner User
+        Halaman Banner Admin
       </h1>
-    
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+      <div className="relative mb-5 overflow-x-auto text-black ">
+        <div
+          onClick={() => toggleModal()}
+          className="flex items-end w-full gap-2 mr-10 rounded-md mb-7 text-end"
+        >
+          <button className="flex items-center">Create</button>
+          <MdCreate className="relative top-[-5px]" />
+        </div>
+        <table className="w-full text-sm text-left text-white ">
+          <thead className="text-xs font-bold text-white uppercase bg-gradient-to-tr from-blue-800 via-blue-700 to-blue-800">
             <tr>
+              <th scope="col" className="px-6 py-3">
+                No
+              </th>
               <th scope="col" className="px-6 py-3">
                 Name
               </th>
@@ -87,34 +97,38 @@ const BannerUser = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((banner) => (
+            {data.map((banner, index) => (
               <tr
                 key={banner.id}
-                className="border-b odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700"
+                className={` ${
+                  index % 2 === 0
+                    ? "bg-gradient-to-tr from-blue-900 via-blue-700 to-blue-900"
+                    : "bg-gradient-to-tr from-blue-900 via-blue-700 to-blue-900"
+                }`}
               >
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
+                <th>
+                  <p className="px-6 py-4">{index + 1}</p>
+                </th>
+                
+                <th scope="row" className="px-6 py-4 font-medium text-white ">
                   {banner.name}
                 </th>
                 <td className="px-6 py-4">{banner.createdAt}</td>
                 <td className="px-6 py-4">{banner.updatedAt}</td>
                 <td className="flex gap-4 px-6 py-4">
+                  <Link to={`/detail-banner/${banner.id}`}>
+                    <button className="font-medium text-white hover:underline">
+                      Detail
+                    </button>
+                  </Link>
                   <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                    onClick={() => toggleModal()}
-                  >
-                    Create
-                  </button>
-                  <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    className="font-medium text-white hover:underline"
                     onClick={() => handleUpdateBanner(banner)}
                   >
                     Update
                   </button>
                   <button
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    className="font-medium text-white hover:underline"
                     onClick={() => handleDeleteBanner(banner.id)}
                   >
                     Delete

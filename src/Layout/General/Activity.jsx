@@ -31,7 +31,7 @@ const Activity = () => {
   }
 
   return (
-    <div className="p-5 bg-blue-500 md:p-20 md:mt-[-40px]">
+    <div className="p-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-20 md:mt-[-40px]">
       <div className="mb-5 text-2xl text-white md:text-2xl md:mb-5">
         <h2>Bosen ? </h2>
         <p className="md:mb-10">Cobain Aktivitas ini yuk..</p>
@@ -41,7 +41,7 @@ const Activity = () => {
           <Link to={`/activity/${activity.id}`}>
             <button
               key={activity?.id}
-              className="flex-shrink-0 w-[100px] h-[40px] text-white bg-blue-600 items-center text-center rounded-full text-sm md:mb-5"
+              className="flex-shrink-0 w-[100px] h-[40px] text-white bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 items-center text-center rounded-full text-sm md:mb-5"
             >
               {activity?.category?.name}
             </button>
@@ -56,7 +56,9 @@ const Activity = () => {
               key={activity?.id}
               className="flex-shrink-0 py-5 transition-opacity duration-700 ease-in-out"
             >
-              <h2 className="mb-3 text-lg text-white md:text-xl">{activity?.title}</h2>
+              <h2 className="mb-3 text-lg text-white md:text-xl">
+                {activity?.title}
+              </h2>
               <div className="relative gap-3">
                 <img
                   src={activity?.imageUrls[0]}
