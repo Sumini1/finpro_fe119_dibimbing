@@ -5,22 +5,23 @@ import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import ModalProfile from "./ModalProfile";
 import { BsCartPlusFill } from "react-icons/bs";
-import { fetchAddToCart } from "../../reducer/addToCartSlice";
+import { fetchCart } from "../../reducer/cartSlice";
 import { fetchGetLoggedUser } from "../../reducer/loggedUserSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const avatarUrl = useSelector((state) => state.loggedUser?.data?.profilePictureUrl);
+  const avatarUrl = useSelector(
+    (state) => state.loggedUser?.data?.profilePictureUrl
+  );
+  const userRole = useSelector((state) => state.loggedUser?.data?.role);
+  const { cartItems } = useSelector((state) => state.cart);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuProfileOpen, setMenuProfileOpen] = useState(false);
 
-  const handleAddToCart = (item) => {
-    dispatch(fetchAddToCart(item));
-  };
-
   useEffect(() => {
     if (isLoggedIn) {
+      dispatch(fetchCart());
       dispatch(fetchGetLoggedUser()); // Ambil data user jika sudah login
     }
   }, [isLoggedIn, dispatch]);
@@ -33,14 +34,6 @@ const Navbar = () => {
     dispatch(fetchLogout());
   };
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      dispatch(fetchGetLoggedUser());
-    }
-  }, [isLoggedIn, dispatch]);
-
-
-  console.log("avatar", avatarUrl)
   return (
     <div className="sticky top-0 z-10 bg-white font-['Itim']">
       <div className="flex items-center justify-between p-5 text-2xl md:p-5 md:text-xl">
@@ -68,12 +61,18 @@ const Navbar = () => {
           <p className="mx-auto md:mx-0">Promo</p>
           <p className="mx-auto md:mx-0">Category</p>
           <p className="mx-auto md:mx-0">Activity</p>
-          <Link to={"/cart"}>
-            <BsCartPlusFill
-              className="mx-auto text-blue-700 md:mx-0"
-              onClick={() => handleAddToCart()}
-            />
-          </Link>
+
+          {/* Tampilkan keranjang hanya jika yang login adalah user */}
+          {isLoggedIn && userRole === "user" && (
+            <Link to={"/cart"} className="relative ">
+              <BsCartPlusFill className="mx-auto text-blue-700 md:mx-0 " />
+              {cartItems.length > 0 && (
+                <div className="absolute -top-2 -right-1 text-xs bg-rose-700 text-white rounded-full w-4 h-4 flex items-center justify-center">
+                  {cartItems.reduce((acc, item) => acc + item.quantity || 0, 0)}
+                </div>
+              )}
+            </Link>
+          )}
 
           {/* Login/Logout Section */}
           {isLoggedIn ? (
@@ -100,7 +99,7 @@ const Navbar = () => {
             </>
           ) : (
             <Link to={"/login"}>
-              <p>Login</p>
+              <p className="bg-blue-600 text-white p-2  text-sm font-semibold  text-center items-center rounded-full mx-auto flex -mt-1 font-edu">Login</p>
             </Link>
           )}
         </div>

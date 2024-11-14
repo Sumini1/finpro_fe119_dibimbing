@@ -1,4 +1,4 @@
-import ProtectedRoute from "./hoc/protectedRoute";
+import { ProtectedRouteUser } from "./hoc/protectedRoute";
 import Register from "./pages/Authentication/Register";
 import Login from "./pages/Authentication/Login";
 import Home from "./pages/Home";
@@ -90,7 +90,11 @@ export const routes = [
   },
   {
     path: "/activity/:id",
-    element: <ActivityId />,
+    element: (
+      <ProtectedRouteUser>
+        <ActivityId />
+      </ProtectedRouteUser>
+    ),
   },
   {
     path: "/sidebar",
@@ -133,7 +137,7 @@ export const routes = [
     element: <ListCategory />,
   },
   {
-path: "/detail-banner/:id",
+    path: "/detail-banner/:id",
     element: <DetailBannerAdmin />,
   },
   {
@@ -150,10 +154,14 @@ path: "/detail-banner/:id",
   },
   {
     path: "/cart",
-    element: <CartPage />,
+    element: (
+      <ProtectedRouteUser>
+        <CartPage />
+      </ProtectedRouteUser>
+    ),
   },
   {
     path: "*",
     element: <ErrorPage />,
-  }
+  },
 ];

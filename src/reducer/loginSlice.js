@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 
 export const fetchLogin = createAsyncThunk(
   "login/fetchLogin",
+
   async (userData, { rejectWithValue }) => {
     try {
       const response = await fetch(
@@ -24,6 +25,7 @@ export const fetchLogin = createAsyncThunk(
       }
 
       localStorage.setItem("accessToken", data.token);
+      localStorage.setItem("role", data.data.role)
 
       Swal.fire({
         title: "Login Successfully",

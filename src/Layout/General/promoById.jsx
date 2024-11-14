@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchGetPromoById } from "../../reducer/promoByIdSlice";
-import { fetchAddToCart } from "../../reducer/addToCartSlice"; // Use fetchAddToCart instead
+import { fetchAddToCart } from "../../reducer/cartSlice"; // Use fetchAddToCart instead
 import { useParams, Link } from "react-router-dom";
 
 const PromoById = () => {
