@@ -7,6 +7,7 @@ import { fetchDeleteBanner } from "../../reducer/deleteBannerSlice";
 import { MdCreate } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
 
 const BannerUser = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,18 @@ const BannerUser = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalUpdateBanner, setIsModalUpdateBanner] = useState(false);
   const [updateBanner, setUpdateBanner] = useState(null);
+   const [searchQuery, setSearchQuery] = useState("");
+
+
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+  // Filter data berdasarkan query pencarian
+  const filteredBanner = data.filter((banner) =>
+    banner.name
+      ? banner.name.toLowerCase().includes(searchQuery.toLowerCase())
+      : false
+  );
 
   const handleDeleteBanner = (id) => {
     Swal.fire({
@@ -64,18 +77,30 @@ const BannerUser = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <h1 className="py-5 font-['Roboto Condensed'] text-md">
+      <h1 className="py-5 font-['Roboto Condensed'] text-md md:text-xl mx-5">
         Halaman Banner Admin
       </h1>
 
-      <div className="relative mb-5 overflow-x-auto text-black ">
+      <div className="grid grid-cols-1 p-2 mb-2 rounded-full md:grid-cols-2 md:rounded-lg md:items-center">
+        <div className="flex w-full gap-2 p-2 mb-2 rounded-full bg-slate-100 md:mt-[5px] order-2 md:order-1">
+          <CiSearch className="mx-5 mt-1" />
+          <input
+            type="text"
+            placeholder="Cari berdasarkan nama..."
+            value={searchQuery}
+            onChange={handleInputChange}
+            className="w-64 py-0 text-black rounded-full outline-none bg-slate-100"
+          />
+        </div>
         <div
           onClick={() => toggleModal()}
-          className="flex items-end w-full gap-2 mr-10 rounded-md mb-7 text-end"
+          className="flex items-end order-1 w-full gap-2 mx-5 mt-0 mb-5 mr-10 rounded-md text-end md:order-2 md:mt-3"
         >
-          <button className="flex items-center">Create</button>
+          <button className="flex items-center ">Create</button>
           <MdCreate className="relative top-[-5px]" />
         </div>
+      </div>
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-white ">
           <thead className="text-xs font-bold text-white uppercase bg-gradient-to-tr from-blue-800 via-blue-700 to-blue-800">
             <tr>
@@ -97,7 +122,7 @@ const BannerUser = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((banner, index) => (
+            {filteredBanner.map((banner, index) => (
               <tr
                 key={banner.id}
                 className={` ${
@@ -109,7 +134,7 @@ const BannerUser = () => {
                 <th>
                   <p className="px-6 py-4">{index + 1}</p>
                 </th>
-                
+
                 <th scope="row" className="px-6 py-4 font-medium text-white ">
                   {banner.name}
                 </th>

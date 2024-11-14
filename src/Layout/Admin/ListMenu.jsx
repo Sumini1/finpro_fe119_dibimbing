@@ -24,17 +24,17 @@ const ListMenu = ({closeSidebar}) => {
   return (
     <div className="h-full px-3 py-4 overflow-y-auto bg-gradient-to-tr from-blue-800 via-blue-700 to-blue-800">
       <div className="mb-4 text-right">
-        <button onClick={closeSidebar} className="text-xl font-bold text-white">
+        <button onClick={closeSidebar} className="text-xl font-bold text-white md:hidden">
           X
         </button>
       </div>
       <ul className="space-y-2 font-medium">
         <li>
           <Link
-            to="/"
+            to="/banner-user"
             onClick={closeSidebar}
             className={`flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group ${isActive(
-              "/"
+              "#"
             )}`}
           >
             <MdDashboard className="text-lg md:text-xl" />

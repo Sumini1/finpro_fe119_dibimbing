@@ -11,7 +11,7 @@ import { fetchGetLoggedUser } from "../../reducer/loggedUserSlice";
 const Navbar = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
-  const avatarUrl = useSelector((state) => state.user?.data?.profilePictureUrl);
+  const avatarUrl = useSelector((state) => state.loggedUser?.data?.profilePictureUrl);
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuProfileOpen, setMenuProfileOpen] = useState(false);
 
@@ -33,6 +33,14 @@ const Navbar = () => {
     dispatch(fetchLogout());
   };
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(fetchGetLoggedUser());
+    }
+  }, [isLoggedIn, dispatch]);
+
+
+  console.log("avatar", avatarUrl)
   return (
     <div className="sticky top-0 z-10 bg-white font-['Itim']">
       <div className="flex items-center justify-between p-5 text-2xl md:p-5 md:text-xl">
@@ -74,7 +82,7 @@ const Navbar = () => {
                 <img
                   src={avatarUrl}
                   alt="User Avatar"
-                  className="w-8 h-8 rounded-full cursor-pointer"
+                  className="mx-auto text-3xl rounded-full cursor-pointer md:mx-0 w-[30px] h-[30px]"
                   onClick={handleProfile}
                 />
               ) : (
@@ -87,7 +95,6 @@ const Navbar = () => {
                 <ModalProfile
                   handleLogout={handleLogout}
                   onClose={() => setMenuProfileOpen(false)}
-                 
                 />
               )}
             </>

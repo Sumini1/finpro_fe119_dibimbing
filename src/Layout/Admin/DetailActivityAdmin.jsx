@@ -46,16 +46,16 @@ const DetailActivityAdmin = () => {
             </p>
 
             <div className="grid">
-              <div className="flex">
+              <div className="flex gap-3">
                 {data.imageUrls && data.imageUrls.length > 0 && (
                   <div>
-                    <h4 className="mb-2 text-xl">Images:</h4>
+                    <h4 className="mb-2 text-xl ">Images:</h4>
                     {data.imageUrls.map((image, index) => (
                       <img
                         key={index}
                         src={image}
                         alt={`Activity Image ${index + 1}`}
-                        className="w-[350px] h-[250px] rounded-lg md:w-[900px] md:h-[500px]"
+                        className="w-[350px] h-[250px] rounded-lg md:w-[700px] md:h-[500px] flex-row gap-5"
                       />
                     ))}
                   </div>

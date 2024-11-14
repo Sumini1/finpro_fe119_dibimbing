@@ -17,17 +17,36 @@ const ActivitiesAdmin = () => {
     useState(false);
   const [updateActivity, setUpdateActivity] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const activitiesPerPage = 10;
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
   // Filter data berdasarkan query pencarian
-  const filteredUsers = data.filter((activity) =>
+  const filteredActivity = data.filter((activity) =>
     activity.title
       ? activity.title.toLowerCase().includes(searchQuery.toLowerCase())
       : false
   );
+
+  // Data untuk halaman saat ini
+  const indexOfLastActivity = currentPage * activitiesPerPage;
+  const indexOfFirstActivity = indexOfLastActivity - activitiesPerPage;
+  const currentActivities = filteredActivity.slice(indexOfFirstActivity, indexOfLastActivity);
+
+  // Total halaman
+  const totalPages = Math.ceil(filteredActivity.length / activitiesPerPage);
+
+  // Fungsi untuk berpindah halaman
+  const goToPreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
 
   const handleDeleteActivity = (id) => {
     Swal.fire({
@@ -69,13 +88,13 @@ const ActivitiesAdmin = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <h1 className="py-5 font-['Roboto Condensed'] text-md  md:text-xl mx-5">
+      <h1 className="py-4 font-['Roboto Condensed'] text-md  md:text-xl mx-5">
         Halaman Activities
       </h1>
 
       <div className="grid grid-cols-1 p-2 mb-2 rounded-full md:grid-cols-2 md:rounded-lg md:items-center">
-        <div className="flex w-full gap-2 p-2 mb-2 rounded-full bg-slate-100 md:mt-[10px] order-2 md:order-1">
-          <CiSearch className="mx-5 mt-1"/>
+        <div className="flex w-full gap-2 p-2 mb-2 rounded-full bg-slate-100 md:mt-[5px] order-2 md:order-1">
+          <CiSearch className="mx-5 mt-1" />
           <input
             type="text"
             placeholder="Cari berdasarkan nama..."
@@ -114,7 +133,7 @@ const ActivitiesAdmin = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((activity, index) => (
+            {currentActivities.map((activity, index) => (
               <tr
                 key={activity.id}
                 className={` ${
@@ -154,6 +173,32 @@ const ActivitiesAdmin = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls with Arrows */}
+      <div className="flex justify-center mt-5">
+        <button
+          onClick={goToPreviousPage}
+          disabled={currentPage === 1}
+          className={`mx-2 px-3 py-1 rounded-md ${
+            currentPage === 1
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-600 text-white"
+          }`}
+        >
+          Previous
+        </button>
+        <button
+          onClick={goToNextPage}
+          disabled={currentPage === totalPages}
+          className={`mx-2 px-3 py-1 rounded-md ${
+            currentPage === totalPages
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-600 text-white"
+          }`}
+        >
+          Next
+        </button>
       </div>
 
       <div className="grid grid-cols-3 gap-5 p-5">

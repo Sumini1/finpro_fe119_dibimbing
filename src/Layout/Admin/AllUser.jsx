@@ -27,17 +27,11 @@ const AllUser = () => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearch = () => {
-    // Logika pencarian bisa diterapkan di sini
-    setCurrentPage(1); // Reset halaman ke 1 setelah pencarian
-  };
-
-  // Fungsi untuk menangani pencarian saat tombol Enter ditekan
-  // const handleKeyPress = (event) => {
-  //   if (event.key === "Enter") {
-  //     handleSearch(); // Memanggil fungsi handleSearch saat Enter ditekan
-  //   }
+  // const handleSearch = () => {
+  //   // Logika pencarian bisa diterapkan di sini
+  //   setCurrentPage(1); // Reset halaman ke 1 setelah pencarian
   // };
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -139,7 +133,7 @@ const AllUser = () => {
       </div>
 
       {/* Pagination Controls with Arrows */}
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-5">
         <button
           onClick={goToPreviousPage}
           disabled={currentPage === 1}
