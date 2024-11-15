@@ -36,17 +36,20 @@ const Navbar = () => {
 
   return (
     <div className="sticky top-0 z-10 bg-white font-['Itim']">
-      <div className="flex items-center justify-between p-5 text-2xl md:p-5 md:text-xl">
+      <div className="flex items-center justify-between p-5 mx-auto text-2xl md:p-5 md:text-xl">
         {/* Logo */}
         <div className="flex items-center text-sm md:text-2xl">
-          <h1 className="text-2xl font-bold text-blue-700 md:text-4xl font-edu md:font-bold">
+          <h1 className="text-2xl font-bold text-blue-700 md:text-4xl font-edu md:font-bold md:mx-5">
             Holidays.In
           </h1>
         </div>
 
         {/* Menu Toggle Button for Mobile */}
         <div className="md:hidden">
-          <button className="text-4xl " onClick={() => setMenuOpen(!menuOpen)}>
+          <button
+            className="text-2xl md:text-4xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
             {menuOpen ? "×" : "≡"}
           </button>
         </div>
@@ -55,7 +58,7 @@ const Navbar = () => {
         <div
           className={`${
             menuOpen ? "flex" : "hidden"
-          } flex-col gap-2 py-5 absolute top-16 left-0 w-full bg-white md:flex md:flex-row md:static md:py-0 md:gap-5 md:w-auto `}
+          } flex-col gap-1 py-5 absolute top-16 left-0 w-full bg-white md:flex md:flex-row md:static md:py-0 md:gap-5 md:w-auto text-[20px] md:text-xl`}
         >
           <p className="mx-auto mt-[-20px] md:mt-0 md:mx-0">About</p>
           <p className="mx-auto md:mx-0">Promo</p>
@@ -64,16 +67,17 @@ const Navbar = () => {
 
           {/* Tampilkan keranjang hanya jika yang login adalah user */}
           {isLoggedIn && userRole === "user" && (
-            <Link to={"/cart"} className="relative ">
-              <BsCartPlusFill className="mx-auto text-blue-700 md:mx-0 " />
+            <Link to={"/cart"} className="relative">
+              <BsCartPlusFill className="mx-auto text-blue-700 md:mx-0 md:mt-1" />
+
+              {/* Cart item count */}
               {cartItems.length > 0 && (
-                <div className="absolute -top-2 -right-1 text-xs bg-rose-700 text-white rounded-full w-4 h-4 flex items-center justify-center">
+                <div className="absolute flex items-center justify-center w-4 h-4 text-xs text-white rounded-full bg-rose-700 right-44 top-[-7px] md:-top-1 md:-right-1">
                   {cartItems.reduce((acc, item) => acc + item.quantity || 0, 0)}
                 </div>
               )}
             </Link>
           )}
-
           {/* Login/Logout Section */}
           {isLoggedIn ? (
             <>
@@ -99,7 +103,11 @@ const Navbar = () => {
             </>
           ) : (
             <Link to={"/login"}>
-              <p className="bg-blue-600 text-white p-2  text-sm font-semibold  text-center items-center rounded-full mx-auto flex -mt-1 font-edu">Login</p>
+              <div className="flex items-center justify-center mt-1">
+                <p className="flex justify-center items-center p-1 md:p-2  -mt-1 text-sm font-semibold text-center text-white bg-blue-600 mx-auto rounded-full font-edu w-[70px] h-[32px]">
+                  Login
+                </p>
+              </div>
             </Link>
           )}
         </div>

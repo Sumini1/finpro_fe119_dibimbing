@@ -39,54 +39,68 @@ const handleDelete = (id) => {
     });
 };
 
+ const formatToIDR = (amount) => {
+   return new Intl.NumberFormat("id-ID", {
+     style: "currency",
+     currency: "IDR",
+   }).format(amount);
+ };
+
   return (
-    <div className="p-10">
+    <div >
       <Navbar />
-      <h1>Your Cart</h1>
-      {cartItems.length > 0 ? (
-        cartItems.map((item, index) => (
-          <div key={index}>
-            <p>{item?.activity?.title}</p>
-            <p>{item?.activity?.description}</p>
-            <p>{item?.activity?.price}</p>
-            <p>{item.quantity * item?.activity?.price}</p>
+      <div className="text-white p-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-20 md:mt-[-40px] min-h-screen">
+        <h1>Your Cart</h1>
+        {cartItems.length > 0 ? (
+          cartItems.map((item, index) => (
+            <div key={index}>
+              <p>{item?.activity?.title}</p>
+              <p>{item?.activity?.facilities}</p>
+              <p>{item?.activity?.price_discount}</p>
+              <p>{item?.activity?.description}</p>
+              <p>{`${formatToIDR(item?.activity?.price)}`}</p>
+              <p>{`${formatToIDR(item?.quantity * item?.activity?.price)}`}</p>
 
-            <div className="flex gap-10">
-              <button
-                onClick={() =>
-                  handleUpdateQuantity(item?.quantity + 1, item?.id)
-                }
-              >
-                +
-              </button>
-              <p>{item?.quantity}</p>
-              <button
-                onClick={() =>
-                  handleUpdateQuantity(item?.quantity - 1, item?.id)
-                }
-              >
-                -
-              </button>
-              <button onClick={() => handleDelete(item?.id)}>Remove</button>
+              <div className="flex gap-10">
+                <button
+                  onClick={() =>
+                    handleUpdateQuantity(item?.quantity + 1, item?.id)
+                  }
+                >
+                  +
+                </button>
+                <p>{item?.quantity}</p>
+                <button
+                  onClick={() =>
+                    handleUpdateQuantity(item?.quantity - 1, item?.id)
+                  }
+                >
+                  -
+                </button>
+                <button onClick={() => handleDelete(item?.id)}>Remove</button>
+              </div>
             </div>
-          </div>
-        ))
-      ) : (
-        <p>Your cart is empty.</p>
-      )}
+          ))
+        ) : (
+          <p>Your cart is empty.</p>
+        )}
 
-      {cartItems.length > 0 && (
-        <div>
-          <p>
-            Total Price:{" "}
-            {cartItems.reduce(
-              (total, item) => total + item.quantity * item?.activity?.price,
-              0
-            )}
-          </p>
-          <button>Checkout</button>
-        </div>
-      )}
+        {cartItems.length > 0 && (
+          <div>
+            <p>
+              Total Price:{" "}
+              {formatToIDR(
+                cartItems.reduce(
+                  (total, item) =>
+                    total + item.quantity * item?.activity?.price,
+                  0
+                )
+              )}
+            </p>
+            <button>Checkout</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

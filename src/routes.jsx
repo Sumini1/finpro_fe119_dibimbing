@@ -1,4 +1,4 @@
-import { ProtectedRouteUser } from "./hoc/protectedRoute";
+import { ProtectedRouteUser, ProtectedRouteAdmin } from "./hoc/ProtectedRoute";
 import Register from "./pages/Authentication/Register";
 import Login from "./pages/Authentication/Login";
 import Home from "./pages/Home";
@@ -51,9 +51,11 @@ export const routes = [
   {
     path: "/alluser",
     element: (
-      <Sidebar>
-        <AllUser />
-      </Sidebar>
+      <ProtectedRouteAdmin>
+        <Sidebar>
+          <AllUser />
+        </Sidebar>
+      </ProtectedRouteAdmin>
     ),
   },
   {
@@ -71,9 +73,11 @@ export const routes = [
   {
     path: "/banner-user",
     element: (
-      <Sidebar>
-        <BannerUser />
-      </Sidebar>
+      <ProtectedRouteAdmin>
+        <Sidebar>
+          <BannerUser />
+        </Sidebar>
+      </ProtectedRouteAdmin>
     ),
   },
   {
@@ -96,37 +100,51 @@ export const routes = [
       </ProtectedRouteUser>
     ),
   },
-  {
-    path: "/sidebar",
-    element: <Sidebar />,
-  },
+  // {
+  //   path: "/sidebar",
+  //   element: (
+  //     <ProtectedRouteAdmin>
+  //       <Sidebar />
+  //     </ProtectedRouteAdmin>
+  //   ),
+  // },
   {
     path: "/promo-admin",
     element: (
-      <Sidebar>
-        <PromoAdmin />
-      </Sidebar>
+      <ProtectedRouteAdmin>
+        <Sidebar>
+          <PromoAdmin />
+        </Sidebar>
+      </ProtectedRouteAdmin>
     ),
   },
   {
     path: "/category-admin",
     element: (
-      <Sidebar>
-        <CategoryAdmin />
-      </Sidebar>
+      <ProtectedRouteAdmin>
+        <Sidebar>
+          <CategoryAdmin />
+        </Sidebar>
+      </ProtectedRouteAdmin>
     ),
   },
   {
     path: "/activities-admin",
     element: (
-      <Sidebar>
-        <ActivitiesAdmin />
-      </Sidebar>
+      <ProtectedRouteAdmin>
+        <Sidebar>
+          <ActivitiesAdmin />
+        </Sidebar>
+      </ProtectedRouteAdmin>
     ),
   },
   {
     path: "/payment-method",
-    element: <PaymentMethod />,
+    element: (
+      <ProtectedRouteUser>
+        <PaymentMethod />
+      </ProtectedRouteUser>
+    ),
   },
   {
     path: "/list-promo",
@@ -138,19 +156,35 @@ export const routes = [
   },
   {
     path: "/detail-banner/:id",
-    element: <DetailBannerAdmin />,
+    element: (
+      <ProtectedRouteAdmin>
+        <DetailBannerAdmin />
+      </ProtectedRouteAdmin>
+    ),
   },
   {
     path: "/detail-promo/:id",
-    element: <DetailPromoAdmin />,
+    element: (
+      <ProtectedRouteAdmin>
+        <DetailPromoAdmin />
+      </ProtectedRouteAdmin>
+    ),
   },
   {
     path: "/detail-category/:id",
-    element: <DetailCategoryAdmin />,
+    element: (
+      <ProtectedRouteAdmin>
+        <DetailCategoryAdmin />
+      </ProtectedRouteAdmin>
+    ),
   },
   {
     path: "/detail-activity/:id",
-    element: <DetailActivityAdmin />,
+    element: (
+      <ProtectedRouteAdmin>
+        <DetailActivityAdmin />
+      </ProtectedRouteAdmin>
+    ),
   },
   {
     path: "/cart",
