@@ -7,7 +7,7 @@ import BannerById from "./Layout/General/BannerById";
 import AllUser from "./Layout/Admin/AllUser";
 import LoggedUser from "./Layout/User/Users/LoggedUser";
 import Promo from "./Layout/General/Promo";
-import PromoById from "./Layout/General/PromoById";
+import PromoById from "./Layout/User/Users/PromoById";
 import BannerUser from "./Layout/Admin/BannerUser";
 import Category from "./Layout/General/Category";
 import CategoryById from "./Layout/General/CategoryById";
