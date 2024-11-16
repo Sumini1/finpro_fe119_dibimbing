@@ -25,21 +25,21 @@ const DetailPromoAdmin = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen p-6 py-5 bg-blue-500 md:p-10">
+      <div className="min-h-screen p-6 py-5 bg-blue-500 md:p-10 ">
         <div className="text-lg text-white">
           {isLoading && <p>Loading...</p>}
           {message && <p>Error: {message}</p>}
           {data ? (
-            <div className="flex flex-col items-center justify-center shadow-lg">
-              <div className="flex flex-col gap-2 md:flex-row">
+            <div className="flex flex-col items-center justify-center shadow-lg ">
+              <div className="flex flex-col gap-2 md:flex-row md:mb-5">
                 <div className="w-full p-3 md:max-w-md lg:max-w-lg">
                   <img
                     src={data.imageUrl}
                     alt={data.title}
-                    className="w-[600px] h-auto rounded-lg "
+                    className="w-full h-auto rounded-lg "
                   />
                 </div>
-                <div className="flex flex-col gap-2 p-5 mt-1 md:p-10 md:mt-[-30px]">
+                <div className="flex flex-col gap-2 p-5 mt-1 md:p-10 md:mt-[50px]">
                   <h2 className="mb-2 text-xl font-semibold">
                     Title: {data.title}
                   </h2>
@@ -53,9 +53,7 @@ const DetailPromoAdmin = () => {
                     data?.minimum_claim_price
                   )}`}</p>
                   <div className="flex items-center gap-2 mt-5 md:items-start">
-                    <button className="w-[150px] mt-3 bg-blue-600 rounded-full text-center p-1">
-                      Claim Now
-                    </button>
+                  
                     <Link to="/promo-admin">
                       <button className="w-[170px] mt-3 bg-blue-600 rounded-full p-1">
                         Back to Dasboard

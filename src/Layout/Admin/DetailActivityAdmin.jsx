@@ -21,70 +21,67 @@ const DetailActivityAdmin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-500">
+    <div>
       <Navbar />
-      <div className="min-h-screen p-5 py-5 text-white bg-blue-500 md:p-20 md:mr-32">
+      <div className="min-h-screen p-5  text-white bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
         {isLoading && <p>Loading...</p>}
         {message && <p>Error: {message}</p>}
         {data ? (
-          <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-            <h3 className="mb-3 text-xl">Title: {data?.title}</h3>
+          <div className="flex flex-col md:mx-10">
+            <h3 className="mb-3 text-xl md:text-2xl">Title: {data.title}</h3>
             <p>{`Price : ${formatToIDR(data.price)}`}</p>
             <p>{`Price Discount : ${formatToIDR(data?.price_discount)}`}</p>
             <p>{`Rating : ${data.rating}`}</p>
-            <p>{`Total Reviews : ${data?.total_reviews}`}</p>
+            <p>{`Total Review : ${data?.total_reviews}`}</p>
             <p>{`Fasilitas : ${data?.facilities}`}</p>
-            <p className="md:w-[400px] w-[350px]">
-              {`Address : ${data?.address}`}{" "}
-            </p>
-            <p>{`Provinsi : ${data?.province}`}</p>
+            <p>{`Alamat : ${data?.address}`}</p>
             <p>{`Kota : ${data?.city}`}</p>
-            <p>{`Created At : ${data.createdAt}`}</p>
-            <p>{`Updated At : ${data.updatedAt}`}</p>
-            <p className="mb-3 text-lg md:w-[400px] w-[350px]">
-              Description: {data.description}
+            <p>{`Provinsi : ${data?.province}`}</p>
+            <p>{`Created At : ${data?.createdAt}`}</p>
+            <p>{`Updated At : ${data?.updatedAt}`}</p>
+            <p className="w-full mb-3 text-lg md:w-[500px]">
+              Description: {data?.description}
             </p>
 
-            <div className="grid">
-              <div className="flex gap-3">
+            {data.imageUrls && data.imageUrls.length > 0 && (
+              <div className="flex flex-col ">
+                <h4 className="mb-2 text-xl">Images:</h4>
                 {data.imageUrls && data.imageUrls.length > 0 && (
-                  <div>
-                    <h4 className="mb-2 text-xl ">Images:</h4>
-                    {data.imageUrls.map((image, index) => (
-                      <img
-                        key={index}
-                        src={image}
-                        alt={`Activity Image ${index + 1}`}
-                        className="w-[350px] h-[250px] rounded-lg md:w-[700px] md:h-[500px] flex-row gap-5"
-                      />
-                    ))}
+                  <div className="flex flex-col items-center md:flex-row md:items-start md:gap-5">
+                    <div className="mb-5 md:mb-0">
+                      {/* <h4 className="mb-2 text-xl">Images:</h4> */}
+                      {data.imageUrls.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image}
+                          alt={`Activity Image ${index + 1}`}
+                          className="w-full h-full rounded-lg md:w-[500px] md:h-[350px]"
+                        />
+                      ))}
+                    </div>
+
+                    {data.location_maps && (
+                      <div className="mt-5 md:mt-[-30px]">
+                        <h4 className="mb-2 text-xl">Location Map:</h4>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: data.location_maps,
+                          }}
+                          className="w-[350px] h-[250px] border-0 overflow-hidden rounded-lg md:w-[500px] md:h-[350px]"
+                        />
+                        <div className="flex gap-5 mx-4 mt-5 md:text-lg md:flex-row md:gap-2 md:mx-10">
+                          <Link to={"/activities-admin"}>
+                            <button className="flex p-1 justify-center mt-5 bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 w-[200px] rounded-full text-center mb-2 md:mx-6">
+                              Back To Dashboard
+                            </button>
+                          </Link>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
-
-              {data.location_maps && (
-                <div className="grid mt-5">
-                  <h4 className="mb-2 text-xl">Location Map:</h4>
-                  <div
-                    dangerouslySetInnerHTML={{ __html: data.location_maps }}
-                    className="w-[350px] h-[250px] border-0 overflow-hidden rounded-lg md:w-[900px] md:h-[500px]"
-                  />
-                </div>
-              )}
-
-              <div className="flex gap-5 p-1 mx-3 md:text-lg md:flex-row md:gap-2  md:mt-[-20px]">
-                <Link to={"/"}>
-                  <button className="flex justify-center items-center mt-5 bg-blue-600 w-[150px] rounded-full text-center mb-2 md:mx-6">
-                    Back To Home
-                  </button>
-                </Link>
-                <Link to={"/add-to-cart"}>
-                  <button className="flex justify-center items-center mt-5 bg-blue-600 w-[150px] rounded-full text-center mb-2 md:mx-6">
-                    Add To Cart
-                  </button>
-                </Link>
-              </div>
-            </div>
+            )}
           </div>
         ) : (
           <p>No activity found.</p>

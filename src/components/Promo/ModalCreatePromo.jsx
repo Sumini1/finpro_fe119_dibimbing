@@ -58,8 +58,8 @@ const ModalCreatePromo = ({ isModalOpen, toggleModal }) => {
 
     const promoData = {
       ...formData,
-      promo_discount_price: parseInt(formData.promo_discount_price, 10), // Ubah menjadi integer
-      minimum_claim_price: parseInt(formData.minimum_claim_price, 10), // Ubah menjadi integer
+      promo_discount_price: parseInt(formData.promo_discount_price, 10), 
+      minimum_claim_price: parseInt(formData.minimum_claim_price, 10), 
       imageUrl,
     };
     dispatch(fetchCreatePromo(promoData))
@@ -75,14 +75,14 @@ const ModalCreatePromo = ({ isModalOpen, toggleModal }) => {
   if (!isModalOpen) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative max-w-md p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+      <div className="relative max-w-md p-4 bg-blue-700 rounded-lg shadow text-white">
         <div className="flex items-center justify-between pb-3 mb-4 border-b">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <h3 className="text-lg font-semibold text-white ">
             Create Promo
           </h3>
           <button
             onClick={toggleModal}
-            className="text-gray-400 hover:text-gray-900"
+            className="text-white"
           >
             &times;
           </button>
@@ -203,7 +203,7 @@ const ModalCreatePromo = ({ isModalOpen, toggleModal }) => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+            className="w-full py-2 text-white bg-blue-800 rounded "
           >
             Submit
           </button>

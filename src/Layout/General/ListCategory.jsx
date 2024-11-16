@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchGetCategories } from "../../reducer/categorySlice";
 import { Link } from "react-router-dom";
+import Navbar from "../../components/General/Navbar";
 
 const ListCategory = () => {
   const dispatch = useDispatch();
@@ -19,11 +20,13 @@ const ListCategory = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen p-5 py-5 text-lg bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-10 ">
-      <h1 className="text-white font-['Itim'] text-2xl py-5 p-5">
+<div>
+  <Navbar />
+      <div className="flex flex-col min-h-screen p-1 py-1 text-lg bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-10 ">
+      <h1 className="text-white font-['Itim'] text-2xl md:text-4xl py-2 p-5">
         List Category
       </h1>
-      <div className="grid grid-cols-1 gap-5 p-5 text-white md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:gap-7 p-5 text-white md:grid-cols-3">
         {data.map((category) => (
           <div key={category.id} className="flex flex-col gap-3">
             <h2 className="mb-2 text-xl">{category?.name}</h2>
@@ -37,12 +40,13 @@ const ListCategory = () => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-5 text-white bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 w-[200px] rounded-full mx-auto">
+      <div className="flex justify-center mt-5 text-white bg-blue-700 w-[200px] rounded-full mx-auto mb-5">
         <Link to={"/"}>
-          <button>Back To Home</button>
+          <button className="p-1">Back To Home</button>
         </Link>
       </div>
     </div>
+</div>
   );
 };
 

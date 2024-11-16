@@ -91,9 +91,9 @@ const UpdateBanner = ({ bannerId, toggleModal, banner }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative max-w-md p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+      <div className="relative max-w-md p-4 bg-white rounded-lg shadow ">
         <div className="flex items-center justify-between pb-3 mb-4 border-b">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <h3 className="text-lg font-semibold ">
             Update Banner
           </h3>
           <button

@@ -85,14 +85,14 @@ const ModalUpdateCategory = ({ category, categoryId, toggleModal }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative max-w-md p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+      <div className="relative max-w-md p-4 bg-blue-700 rounded-lg shadow ">
         <div className="flex items-center justify-between pb-3 mb-4 border-b">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          <h3 className="text-lg font-semibold text-white">
             Update Category
           </h3>
           <button
             onClick={toggleModal}
-            className="text-gray-400 hover:text-gray-900"
+            className="text-white hover:text-gray-300"
           >
             &times;
           </button>
@@ -127,12 +127,12 @@ const ModalUpdateCategory = ({ category, categoryId, toggleModal }) => {
               id="imageUrl"
               name="imageUrl"
               onChange={(e) => setFileImage(e.target.files[0])}
-              className="w-full p-2"
+              className="w-full p-2 text-white"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+            className="w-full py-2 text-white bg-blue-800 rounded hover:bg-blue-700"
           >
             Submit
           </button>
