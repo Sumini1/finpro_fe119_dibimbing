@@ -1,124 +1,4 @@
-// import React from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import Navbar from "../../../components/General/Navbar";
-// import { fetchCart, fetchCartUpdate,  fetchCartDelete } from "../../../reducer/cartSlice";
-// import Swal from "sweetalert2"
-// import { RiDeleteBin5Line } from "react-icons/ri";
 
-// const CartPage = () => {
-//   const dispatch = useDispatch()
-//   const cartItems = useSelector((state) => state.cart.cartItems);
-//   console.log("cartItems", cartItems);
-
-//   const handleUpdateQuantity = (quantity, id) => {
-//     dispatch(fetchCartUpdate({ id, quantity }))
-//       .unwrap()
-//       .then(() => {
-//         dispatch(fetchCart());
-//       });
-//   };
-// const handleDelete = (id) => {
-//   Swal.fire({
-//     title: "Are you sure?",
-//     text: "You want to delete this Activity?",
-//     icon: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#3085d6",
-//     cancelButtonColor: "#d33",
-//     confirmButtonText: "Yes, delete it!",
-//   })
-//     .then((result) => {
-//       if (result.isConfirmed) {
-//         dispatch(fetchCartDelete(id)).then(() => {
-//           Swal.fire("Deleted!", "Your activity has been deleted.", "success");
-//           dispatch(fetchCart());
-//         });
-//       }
-//     })
-//     .catch(() => {
-//       Swal.fire("Delete failed", "Failed to delete activity.", "error");
-//     });
-// };
-
-//  const formatToIDR = (amount) => {
-//    return new Intl.NumberFormat("id-ID", {
-//      style: "currency",
-//      currency: "IDR",
-//    }).format(amount);
-//  };
-
-//   return (
-//     <div>
-//       <Navbar />
-//       <div className="text-white p-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-20 md:mt-[-40px] min-h-screen">
-//         <h1>Your Cart</h1>
-//         {cartItems.length > 0 ? (
-//           cartItems.map((item, index) => (
-//             <div key={index}>
-//               <p className="mt-7">{item?.activity?.title}</p>
-//               <p>{item?.activity?.facilities}</p>
-//               <p>{item?.activity?.price_discount}</p>
-//               <p>{item?.activity?.description}</p>
-//               <p>{`${formatToIDR(item?.activity?.price)}`}</p>
-//               <p>{`${formatToIDR(item?.quantity * item?.activity?.price)}`}</p>
-//               <img
-//                 className="w-[100px] h-[100px] "
-//                 src={item?.activity?.imageUrls[0]}
-//                 alt={item?.activity?.title}
-//               />
-//               <div className="flex gap-10 ">
-//                 <table className="border-1  ">
-//                   <th>1</th>
-//                   <th>3</th>
-//                   <th></th>
-//                 </table>
-//                 <button
-//                   onClick={() =>
-//                     handleUpdateQuantity(item?.quantity + 1, item?.id)
-//                   }
-//                 >
-//                   +
-//                 </button>
-//                 <p>{item?.quantity}</p>
-//                 <button
-//                   onClick={() =>
-//                     handleUpdateQuantity(item?.quantity - 1, item?.id)
-//                   }
-//                 >
-//                   -
-//                 </button>
-//                 {/* <button onClick={() => handleDelete(item?.id)}>Remove</button> */}
-//                 <RiDeleteBin5Line onClick={() => handleDelete(item?.id)} />
-//               </div>
-//             </div>
-//           ))
-//         ) : (
-//           <p>Your cart is empty.</p>
-//         )}
-
-//         {cartItems.length > 0 && (
-//           <div className="flex flex-col ">
-//             <p>
-//               Total Price:{" "}
-//               {formatToIDR(
-//                 cartItems.reduce(
-//                   (total, item) =>
-//                     total + item.quantity * item?.activity?.price,
-//                   0
-//                 )
-//               )}
-//             </p>
-//             <button className="bg-blue-500 text-white p-2 rounded-lg m-5">
-//               Checkout
-//             </button>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CartPage;
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -130,6 +10,7 @@ import {
 } from "../../../reducer/cartSlice";
 import Swal from "sweetalert2";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import Footer from "../../../components/General/Footer";
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -288,6 +169,7 @@ const CartPage = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

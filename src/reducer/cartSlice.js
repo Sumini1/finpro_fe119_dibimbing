@@ -49,7 +49,7 @@ export const fetchCart = createAsyncThunk(
     }
   }
 );
-
+  
 export const fetchCartUpdate = createAsyncThunk(
   "cart/fetchCartUpdate",
   async ({ id, quantity }) => {
@@ -113,9 +113,6 @@ const cartSlice = createSlice({
     setCartItems: (state, action) => {
       state.cartItems = action.payload.data;
     },
-    // addPromoToCart: (state, action) => {
-    //   state.cartItems.push(action.payload.data);
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -135,7 +132,7 @@ const cartSlice = createSlice({
       })
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.cartItems = action.payload.data; // Add item to cartItems
+        state.cartItems = action.payload.data; 
       })
       .addCase(fetchCart.rejected, (state, action) => {
         state.status = "failed";

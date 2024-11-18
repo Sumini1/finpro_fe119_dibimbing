@@ -39,9 +39,11 @@ const Navbar = () => {
       <div className="flex items-center justify-between p-5 mx-auto text-2xl md:p-5 md:text-xl">
         {/* Logo */}
         <div className="flex items-center text-sm md:text-2xl">
-          <h1 className="text-2xl font-bold text-blue-700 md:text-4xl font-edu md:font-bold md:mx-5">
-            Holidays.In
-          </h1>
+          <Link to={"/"}>
+            <h1 className="text-2xl font-bold text-blue-700 md:text-4xl font-edu md:font-bold md:mx-5">
+              Holidays.In
+            </h1> 
+          </Link>
         </div>
 
         {/* Menu Toggle Button for Mobile */}

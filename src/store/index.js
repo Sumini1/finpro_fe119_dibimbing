@@ -24,6 +24,7 @@ import deleteActivityReducer from "../reducer/deleteActivitySlice";
 import paymentMethodReducer from "../reducer/paymentMethodSlice";
 import logoutReducer from "../reducer/logoutSlice";
 import cartReducer from "../reducer/cartSlice";
+import transactionReducer from "../reducer/transactionSlice";
 
 export const store = configureStore({
   reducer: {
@@ -52,5 +53,6 @@ export const store = configureStore({
     paymentMethod: paymentMethodReducer,
     logout: logoutReducer,
     cart: cartReducer,
+    transaction: transactionReducer,
   },
 });

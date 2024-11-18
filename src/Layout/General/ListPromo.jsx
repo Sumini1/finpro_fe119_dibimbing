@@ -38,7 +38,7 @@ const ListPromo = () => {
               />
             </Link>
             {/* <p>{promo?.description}</p> */}
-            <p className="mx-2 mt-3 font-['Itim'] text-lg mt-2">{`Code promo : ${promo.promo_code}`}</p>
+            <p className="mx-2 font-['Itim'] text-lg mt-2">{`Code promo : ${promo.promo_code}`}</p>
           </div>
         ))}
       </div>

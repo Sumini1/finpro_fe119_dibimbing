@@ -26,6 +26,9 @@ import DetailCategoryAdmin from "./Layout/Admin/DetailCategoryAdmin";
 import DetailActivityAdmin from "./Layout/Admin/DetailActivityAdmin";
 import CartPage from "./Layout/User/Users/CartPage";
 import ErrorPage from "./pages/ErrorPage";
+import ListTransactions from "./Layout/User/Users/ListTransactions";
+import TransactionTable from "./Layout/User/Users/TransactionTable";
+import DetailTransactionAdmin from "./Layout/Admin/DetailTransactionAdmin";
 
 export const routes = [
   {
@@ -198,4 +201,30 @@ export const routes = [
     path: "*",
     element: <ErrorPage />,
   },
+  {
+    path: "/list-transactions",
+    element: (
+      <ProtectedRouteAdmin>
+        <ListTransactions />
+      </ProtectedRouteAdmin>
+    ),
+  },
+  {
+    path: "/transaction-table",
+    element: (
+      <ProtectedRouteAdmin>
+        <Sidebar>
+          <TransactionTable />
+        </Sidebar>
+      </ProtectedRouteAdmin>
+    ),
+  },
+  {
+    path: "/detail-transaction/:id",
+    element: (
+      <ProtectedRouteAdmin>
+        <DetailTransactionAdmin />
+      </ProtectedRouteAdmin>
+    ),
+  }
 ];

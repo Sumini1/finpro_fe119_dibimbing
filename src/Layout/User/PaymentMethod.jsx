@@ -1,16 +1,20 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { fetchPaymentMethod } from "../../reducer/paymentMethodSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/General/Navbar";
-
+import ModalCreateTransaction from "../../components/Users/ModalCreateTransaction";
 
 const PaymentMethod = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { selectedCartItems } = location.state || { selectedCartItems: [] };
-  const {data: paymentMethod} = useSelector((state) => state.paymentMethod);
+  const { data: paymentMethod } = useSelector((state) => state.paymentMethod);
+  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
 
+  const toggleModalCreate = () => {
+    setIsModalCreateOpen((prev) => !prev);
+  };
 
   const [selectedMethod, setSelectedMethod] = useState(null);
 
@@ -33,13 +37,12 @@ const PaymentMethod = () => {
     // proses pembayaran
   };
 
-    const formatToIDR = (amount) => {
-      return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-      }).format(amount);
-    };
-
+  const formatToIDR = (amount) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    }).format(amount);
+  };
 
   return (
     <div>
@@ -88,18 +91,23 @@ const PaymentMethod = () => {
           </div>
           <div className="mt-2 flex gap-2">
             <button
-              onClick={handleSubmit}
-              className="bg-blue-600 text-white px-5 py-2 rounded-lg mt-4"
+              onClick={toggleModalCreate}
+              className="bg-green-600 text-white px-5 py-2 rounded-lg mt-4"
             >
-              Proceed to Pay
+              Create Transaction
             </button>
             <Link to={"/cart"}>
               <button className="bg-blue-600 text-white px-5 py-2 rounded-lg mt-4">
                 Back To Cart
               </button>
             </Link>
+          
           </div>
         </div>
+        {/* Modal */}
+        {isModalCreateOpen && (
+          <ModalCreateTransaction toggleModalCreate={toggleModalCreate} />
+        )}
       </div>
     </div>
   );

@@ -99,9 +99,9 @@ const ListMenu = ({closeSidebar}) => {
         </li>
         <li>
           <Link
-            to="#"
+            to="/transaction-table"
             className={`flex items-center p-2 text-white rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group ${isActive(
-              "#"
+              "/transaction-table"
             )}`}
           >
             <GrTransaction className="text-lg md:text-2xl" />

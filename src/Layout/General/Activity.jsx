@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchActivity } from "../../reducer/activitySlice";
 import { IoStar } from "react-icons/io5";
-
 import{Link} from "react-router-dom"
 
 const Activity = () => {
