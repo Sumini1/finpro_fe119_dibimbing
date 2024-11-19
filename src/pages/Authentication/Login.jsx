@@ -36,7 +36,7 @@ const Login = () => {
     <div className="w-full h-screen flex flex-col md:flex-row text-[#34364A] font-edu">
       <div
         id="Banner"
-        className="md:w-7/12 w-full bg-[url('login.jpeg')] bg-cover text-white flex flex-col justify-between font-sans"
+        className="md:w-7/12 w-full bg-[url('/login.jpg')] bg-cover text-white flex flex-col justify-between font-sans"
       >
         <div className="px-8 pt-8 text-whitee font-edu">
           <h2 className="text-2xl font-bold">TRAVELLING</h2>
