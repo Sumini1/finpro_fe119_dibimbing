@@ -26,16 +26,16 @@ const PaymentMethod = () => {
     setSelectedMethod(methodId);
   };
 
-  const handleSubmit = () => {
-    if (!selectedMethod) {
-      alert("Please select a payment method!");
-      return;
-    }
+  // const handleSubmit = () => {
+  //   if (!selectedMethod) {
+  //     alert("Please select a payment method!");
+  //     return;
+  //   }
 
-    console.log("Selected Method:", selectedMethod);
-    console.log("Selected Items:", selectedCartItems);
-    // proses pembayaran
-  };
+  //   console.log("Selected Method:", selectedMethod);
+  //   console.log("Selected Items:", selectedCartItems);
+  //   // proses pembayaran
+  // };
 
   const formatToIDR = (amount) => {
     return new Intl.NumberFormat("id-ID", {
@@ -101,12 +101,15 @@ const PaymentMethod = () => {
                 Back To Cart
               </button>
             </Link>
-          
           </div>
         </div>
         {/* Modal */}
         {isModalCreateOpen && (
-          <ModalCreateTransaction toggleModalCreate={toggleModalCreate} />
+          <ModalCreateTransaction
+            toggleModalCreate={toggleModalCreate}
+            cartIds={selectedCartItems.map((item) => item.id)}
+            paymentMethodId={selectedMethod}
+          />
         )}
       </div>
     </div>

@@ -1,16 +1,26 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {fetchCreateTransaction} from "../../reducer/createTransactionSlice"
+import { useDispatch } from "react-redux";
+import { fetchCreateTransaction } from "../../reducer/transactionSlice";
+import { useNavigate } from "react-router-dom";
 
-const ModalCreateTransaction = ({ toggleModalCreate }) => {
-  // State lokal untuk menyimpan data form
+const ModalCreateTransaction = ({
+  toggleModalCreate,
+  cartIds,
+  paymentMethodId,
+}) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
-    cartId: "",
-    paymentMethodId: "",
+    cartIds: cartIds || [], 
+    paymentMethodId: paymentMethodId || "", 
   });
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   // Fungsi untuk meng-handle perubahan input
-const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -18,18 +28,49 @@ const handleChange = (e) => {
     }));
   };
 
-  // Fungsi untuk meng-handle submit form
-  const handleSubmit = (e) => { 
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Lakukan tindakan untuk membuat transaksi
-    console.log("Membuat transaksi:", formData);
-    // Tutup modal setelah berhasil membuat transaksi
-    toggleModalCreate();
+    setIsLoading(true);
+    setErrorMessage("");
+
+    // // Validasi Input
+    // if (!formData.cartIds.length) {
+    //   setErrorMessage("Cart ID wajib diisi.");
+    //   setIsLoading(false);
+    //   return;
+    // }
+
+    // if (!formData.paymentMethodId) {
+    //   setErrorMessage("Payment Method ID wajib diisi.");
+    //   setIsLoading(false);
+    //   return;
+    // }
+
+    // Dispatch API Create Transaction
+    dispatch(
+      fetchCreateTransaction({
+        cartIds: formData.cartIds, // Ambil dari formData
+        paymentMethodId: formData.paymentMethodId, // Ambil dari formData
+      })
+    )
+      .unwrap()
+      .then(() => {
+        navigate("/my-transactions");
+        toggleModalCreate();
+      })
+      .catch((error) => {
+        setErrorMessage(
+          "Gagal membuat transaksi: " + (error.message || "Kesalahan server.")
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative p-4 bg-white rounded-lg shadow w-[500px]">
+      <div className="relative m-2 p-4 bg-white rounded-lg shadow w-[500px]">
         <div className="flex items-center justify-between pb-3 mb-4 border-b">
           <h3 className="text-lg font-semibold">Create Transaction</h3>
           <button
@@ -43,18 +84,18 @@ const handleChange = (e) => {
           {/* Input untuk Cart ID */}
           <div>
             <label
-              htmlFor="cartId"
+              htmlFor="cartIds"
               className="block text-sm font-medium text-gray-900"
             >
               Cart ID
             </label>
             <input
               type="text"
-              id="cartId"
-              name="cartId"
-              value={formData.cartId}
+              id="cartIds"
+              name="cartIds"
+              value={formData.cartIds}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-black"
               placeholder="Masukkan Cart ID"
             />
           </div>
@@ -73,7 +114,7 @@ const handleChange = (e) => {
               name="paymentMethodId"
               value={formData.paymentMethodId}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-black"
               placeholder="Masukkan Payment Method ID"
             />
           </div>
@@ -81,10 +122,14 @@ const handleChange = (e) => {
           {/* Tombol Submit */}
           <button
             type="submit"
-            className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+            className={`w-full py-2 text-white rounded ${
+              isLoading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+            }`}
+            disabled={isLoading}
           >
-            Submit
+            {isLoading ? "Loading..." : "Submit"}
           </button>
+          {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
         </form>
       </div>
     </div>

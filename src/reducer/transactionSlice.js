@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export const fetchTransaction = createAsyncThunk(
   "transaction/fetchTransaction",
@@ -86,11 +88,74 @@ export const fetchCreateTransaction = createAsyncThunk(
   }
 );
 
+// my transactions
+export const fetchMyTransactions = createAsyncThunk(
+  "MyTransactions/fetchMyTransactions",
+  async () => {
+    try {
+      const response = await fetch(
+        "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/my-transactions",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+// update transactions
+  
+export const fetchTransactionUpdate = createAsyncThunk(
+  "transaction/fetchTransactionUpdate",
+  async ({ id, proofPaymentUrl }) => {
+    try {
+      const response = await fetch(
+        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-transaction-proof-payment/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify({
+            proofPaymentUrl: proofPaymentUrl,
+          }),
+        }
+      );
+      const result = await response.json();
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Transaction updated successfully",
+      });
+      return result;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+      })
+      throw error;
+    }
+  }
+);
+
 const transactionSlice = createSlice({
   name: "transaction",
   initialState: {
     transactions: [],
     transactionDetail: null,
+    myTransactions: [],
     status: "idle",
     error: null,
     message: "",
@@ -133,7 +198,31 @@ const transactionSlice = createSlice({
       .addCase(fetchCreateTransaction.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
-      });
+      })
+      // fetch my transaction
+      .addCase(fetchMyTransactions.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchMyTransactions.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.myTransactions = action.payload.data;
+      })
+      .addCase(fetchMyTransactions.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+     // fetch my transaction
+     .addCase(fetchTransactionUpdate.pending, (state) => {
+      state.status = "loading";
+    })
+    .addCase(fetchTransactionUpdate.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.message = action.payload.message;
+    })
+    .addCase(fetchTransactionUpdate.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    })
   },
 });
 

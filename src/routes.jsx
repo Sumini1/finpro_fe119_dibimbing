@@ -29,6 +29,8 @@ import ErrorPage from "./pages/ErrorPage";
 import ListTransactions from "./Layout/User/Users/ListTransactions";
 import TransactionTable from "./Layout/User/Users/TransactionTable";
 import DetailTransactionAdmin from "./Layout/Admin/DetailTransactionAdmin";
+import MyTransactions from "./Layout/User/Users/MyTransactions";
+import Faq from "./components/General/Faq";
 
 export const routes = [
   {
@@ -48,9 +50,14 @@ export const routes = [
     element: <GetBanners />,
   },
   {
+    path: "/faq",
+    element: <Faq />,
+  },
+  {
     path: "/banner/:id",
     element: <BannerById />,
   },
+
   {
     path: "/alluser",
     element: (
@@ -103,14 +110,7 @@ export const routes = [
       </ProtectedRouteUser>
     ),
   },
-  // {
-  //   path: "/sidebar",
-  //   element: (
-  //     <ProtectedRouteAdmin>
-  //       <Sidebar />
-  //     </ProtectedRouteAdmin>
-  //   ),
-  // },
+
   {
     path: "/promo-admin",
     element: (
@@ -226,5 +226,13 @@ export const routes = [
         <DetailTransactionAdmin />
       </ProtectedRouteAdmin>
     ),
-  }
+  },
+  {
+    path: "/my-transactions",
+    element: (
+      <ProtectedRouteUser>
+        <MyTransactions />
+      </ProtectedRouteUser>
+    ),
+  },
 ];
