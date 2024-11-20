@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTransaction } from "../../../reducer/transactionSlice";
 import Navbar from "../../../components/General/Navbar";
 import Footer from "../../../components/General/Footer";
+import MyTransactions from "./MyTransactions";
 
 const ListTransactions = () => {
-  const { transaction, status, error } = useSelector(
-    (state) => state.transaction
+  const transactions = useSelector(
+    (state) => state.transaction.transactions
   );
   const dispatch = useDispatch();
 
@@ -14,13 +15,6 @@ const ListTransactions = () => {
     dispatch(fetchTransaction());
   }, [dispatch]);
 
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (status === "failed") {
-    return <div>Error: {error || "Failed to fetch transactions"}</div>;
-  }
 
   return (
     <div>
@@ -30,21 +24,22 @@ const ListTransactions = () => {
           Transactions
         </h1>
         <div className="grid grid-cols-1 gap-3 md:gap-7 p-5 text-white md:grid-cols-3">
-          {transaction.map((transaction) => (
+          {transactions.map((transactions) => (
             <div
-              key={transaction.id}
+              key={transactions.id}
               className="flex flex-col gap-1 shadow-lg h-[300px] rounded-md"
             >
               <div className="flex flex-col p-3">
-                <h2 className="text-md md:mb-1">{`User Id : ${transaction?.userId}`}</h2>
-                <h2 className="text-md md:mb-1">{`Invoice : ${transaction?.invoiceId}`}</h2>
-                <p className="text-md md:mb-1">{`Transaction : ${transaction?.status}`}</p>
+                <h2 className="text-md md:mb-1">{`User Id : ${transactions?.userId}`}</h2>
+                <h2 className="text-md md:mb-1">{`Invoice : ${transactions?.invoiceId}`}</h2>
+                <p className="text-md md:mb-1">{`Transaction : ${transactions?.status}`}</p>
                 {/* <p className="mb-1 text-lg">{`Total Amount : ${transaction?.totalAmount}`}</p> */}
-                <p className=" text-md md:mb-1">{`Transaction : ${transaction?.payment_method?.name}`}</p>
-                <p className="text-md md:mb-1">{`Virtual Account Number : ${transaction?.payment_method?.virtual_account_number}`}</p>
-                <p className="text-md md:mb-1">{`Virtual Account Name : ${transaction?.payment_method?.virtual_account_name}`}</p>
+
+                <p className=" text-md md:mb-1">{`Transaction : ${transactions?.payment_method?.name}`}</p>
+                <p className="text-md md:mb-1">{`Virtual Account Number : ${transactions?.payment_method?.virtual_account_number}`}</p>
+                <p className="text-md md:mb-1">{`Virtual Account Name : ${transactions?.payment_method?.virtual_account_name}`}</p>
                 <img
-                  src={transaction?.payment_method?.imageUrl}
+                  src={transactions?.payment_method?.imageUrl}
                   alt=""
                   className="w-[100px] h-[100px] rounded-md -mt-5"
                 />

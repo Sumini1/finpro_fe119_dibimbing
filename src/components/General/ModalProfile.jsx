@@ -30,9 +30,13 @@ const ModalProfile = ({ onClose, handleLogout }) => {
       <Link to={"/logged-user"}>
         <p className="block px-4 py-2 text-sm text-gray-700">My Account</p>
       </Link>
-      <Link to={"/my-transactions"}> 
-        <p className="block px-4 py-2 text-sm text-gray-700">My Transaction</p>
-      </Link>
+      {userRole === "user" && (
+        <Link to={"/my-transactions"}>
+          <p className="block px-4 py-2 text-sm text-gray-700">
+            My Transaction
+          </p>
+        </Link>
+      )}
       <p className="block px-4 py-2 text-sm text-gray-700">Settings</p>
 
       {/* Link Dashboard hanya tampil jika role adalah 'admin' */}
