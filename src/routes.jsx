@@ -105,9 +105,9 @@ export const routes = [
   {
     path: "/activity/:id",
     element: (
-      <ProtectedRouteUser>
+      
         <ActivityId />
-      </ProtectedRouteUser>
+     
     ),
   },
 

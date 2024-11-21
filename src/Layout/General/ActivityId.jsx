@@ -1,21 +1,29 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,  useNavigate} from "react-router-dom";
 import { fetchGetActivityById } from "../../reducer/activityIdSlice";
 import Navbar from "../../components/General/Navbar";
 import { fetchAddToCart, fetchCart } from "../../reducer/cartSlice";
 
+
 const ActivityId = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data, isLoading, message } = useSelector((state) => state.activityId);
+  const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
   const handleCart = () => {
-    dispatch(fetchAddToCart(id))
+    if (isLoggedIn){
+      dispatch(fetchAddToCart(id))
       .unwrap()
       .then(() => {
         dispatch(fetchCart());
       });
+    }
+     else {
+      navigate("/login")
+     }
   };
 
   useEffect(() => {
@@ -49,7 +57,7 @@ const ActivityId = () => {
             </p>
             {data.imageUrls && data.imageUrls.length > 0 && (
               <div className="flex flex-col ">
-                <h4 className="mb-2 text-xl">Images:</h4>
+                <h4 className="mb-2 text-xl">Gambaran  Tempat</h4>
                 {data.imageUrls && data.imageUrls.length > 0 && (
                   <div className="flex flex-col items-center md:flex-row md:items-start md:gap-5">
                     <div className="mb-5 md:mb-0">

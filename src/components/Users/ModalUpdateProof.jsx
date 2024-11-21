@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchTransactionUpdate } from "../../reducer/transactionSlice";
+import { fetchTransactionUpdate, fetchMyTransactions } from "../../reducer/transactionSlice";
+
 
 const ModalUpdateProof = ({ toggleModalOpen, transactionId }) => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const ModalUpdateProof = ({ toggleModalOpen, transactionId }) => {
     )
       .unwrap()
       .then(() => {
+        dispatch(fetchMyTransactions());
         toggleModalOpen();
       })
       .catch((error) => {

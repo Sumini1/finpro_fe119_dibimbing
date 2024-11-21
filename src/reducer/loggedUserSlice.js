@@ -28,7 +28,7 @@ export const fetchGetLoggedUser = createAsyncThunk(
 const loggedUserSlice = createSlice({
   name: "user",
   initialState: {
-    is3oading: false,
+    isLoading: false,
     message: "",
     data: null,
   },

@@ -3,23 +3,56 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTransaction } from "../../../reducer/transactionSlice";
 import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import ModalupdateStatus from "../../../components/Users/ModalUpdateStatus";
 
 const TransactionTable = () => {
   const dispatch = useDispatch();
   const { transactions, status, error } = useSelector(
     (state) => state.transaction
   );
-  const [searchQuery, setSearchQuery] = useState("");
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactionsPerPage = 10;
+
+  // Filter transaksi berdasarkan query pencarian
+  const filteredTransactions = transactions.filter((transaction) =>
+    transaction.transaction_items?.some((item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  );
+
+  // Menghitung total halaman
+  const totalPages = Math.ceil(
+    filteredTransactions.length / transactionsPerPage
+  );
+
+  // Data untuk halaman saat ini
+  const indexOfLastTransaction = currentPage * transactionsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+  const currentTransactions = filteredTransactions.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
+
+  // Fungsi untuk berpindah halaman
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  // Fungsi untuk berpindah ke halaman sebelumnya
+  const goToPreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  // Handle perubahan input pencarian
+  // Handle perubahan input pencarian
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
-  const filteredTransaction = transactions.filter((transactions) =>
-    transactions.userId
-      ? transactions.userId.toLowerCase().includes(searchQuery.toLowerCase())
-      : false
-  );
 
   useEffect(() => {
     dispatch(fetchTransaction());
@@ -39,6 +72,7 @@ const TransactionTable = () => {
         Halaman Transactions
       </h1>
 
+      {/* Input Pencarian */}
       <div className="grid grid-cols-1 p-2 mb-2 rounded-full md:grid-cols-2 md:rounded-lg md:items-center">
         <div className="flex w-full gap-2 p-2 mb-2 rounded-full bg-slate-100 md:mt-[5px] order-2 md:order-1">
           <CiSearch className="mx-5 mt-1" />
@@ -51,6 +85,8 @@ const TransactionTable = () => {
           />
         </div>
       </div>
+
+      {/* Tabel Transaksi */}
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-white ">
           <thead className="text-xs font-bold text-white uppercase bg-gradient-to-tr from-blue-800 via-blue-700 to-blue-800">
@@ -59,10 +95,10 @@ const TransactionTable = () => {
                 No
               </th>
               <th scope="col" className="px-6 py-3">
-                User Id
+                Activity
               </th>
               <th scope="col" className="px-6 py-3">
-                Name
+                Bank
               </th>
               <th scope="col" className="px-6 py-3">
                 Status
@@ -73,16 +109,15 @@ const TransactionTable = () => {
               <th scope="col" className="px-6 py-3">
                 Updated At
               </th>
-
               <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
-            {filteredTransaction.map((transactions, index) => (
+            {currentTransactions.map((transaction, index) => (
               <tr
-                key={transactions.id}
+                key={transaction.id}
                 className={`${
                   index % 2 === 0
                     ? "bg-gradient-to-tr from-blue-900 via-blue-700 to-blue-900"
@@ -92,28 +127,34 @@ const TransactionTable = () => {
                 <th>
                   <p className="px-6 py-4">{index + 1}</p>
                 </th>
-                <th scope="row" className="px-6 py-4 font-medium text-white">
-                  {transactions?.userId}
-                </th>
-                <th scope="row" className="px-6 py-4 font-medium text-white ">
-                  {transactions?.payment_method?.name}
-                </th>
-                <td className="px-6 py-4">{transactions?.status}</td>
-                <td className="px-6 py-4">{transactions?.createdAt}</td>
-                <td className="px-6 py-4">{transactions?.updatedAt}</td>
+                <td className="px-6 py-4 font-medium text-white">
+                  {transaction.transaction_items?.map((item) => (
+                    <p key={item.id}>{item.title}</p>
+                  ))}
+                </td>
+                <td className="px-6 py-4 font-medium text-white">
+                  {transaction.payment_method?.name || "N/A"}
+                </td>
+                <td className="px-6 py-4">{transaction.status}</td>
+                <td className="px-6 py-4">{transaction.createdAt}</td>
+                <td className="px-6 py-4">{transaction.updatedAt}</td>
                 <td className="flex gap-4 px-6 py-4">
-                  <Link to={`/detail-transaction/${transactions?.id}`}>
+                  <Link to={`/detail-transaction/${transaction.id}`}>
                     <button className="font-medium text-white hover:underline">
                       Detail
                     </button>
                   </Link>
-
-                  <button
-                    className="font-medium text-white hover:underline"
-                    // onClick={() => handleUpdateBanner(banner)}
-                  >
-                    Update Status
-                  </button>
+                  {transaction.status === "pending" && (
+                    <button
+                      onClick={() => {
+                        setIsModalOpen(true);
+                        setSelectedTransaction(transaction);
+                      }}
+                      className="font-medium text-white hover:underline"
+                    >
+                      Update Status
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -121,23 +162,40 @@ const TransactionTable = () => {
         </table>
       </div>
 
-      {/* <div className="grid grid-cols-3 gap-5 p-5">
-        {isModalOpen && (
-          <ModalCreateBanner
-            isModalOpen={isModalOpen}
-            toggleModal={toggleModal}
-          />
-        )}
+      {/* Pagination */}
+      <div className="flex justify-center mt-5 mb-5">
+        <button
+          onClick={goToPreviousPage}
+          disabled={currentPage === 1}
+          className={`mx-2 px-3 py-1 rounded-md ${
+            currentPage === 1
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-600 text-white"
+          }`}
+        >
+          Previous
+        </button>
+        <button
+          onClick={goToNextPage}
+          disabled={currentPage === totalPages}
+          className={`mx-2 px-3 py-1 rounded-md ${
+            currentPage === totalPages
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-600 text-white"
+          }`}
+        >
+          Next
+        </button>
+      </div>
 
-        {isModalUpdateBanner && (
-          <UpdateBanner
-            isModalOpen={isModalUpdateBanner}
-            toggleModal={handleUpdateBanner}
-            bannerId={updateBanner?.id}
-            banner={updateBanner}
-          />
-        )}
-      </div> */}
+      {/* Modal Update Status */}
+      {isModalOpen && (
+        <ModalupdateStatus
+          isModalOpen={isModalOpen}
+          toggleModal={setIsModalOpen}
+          transactionId={selectedTransaction?.id}
+        />
+      )}
     </div>
   );
 };

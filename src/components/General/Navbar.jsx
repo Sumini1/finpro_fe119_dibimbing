@@ -60,20 +60,22 @@ const Navbar = () => {
         <div
           className={`${
             menuOpen ? "flex" : "hidden"
-          } flex-col gap-1 py-5 absolute top-16 left-0 w-full bg-white md:flex md:flex-row md:static md:py-0 md:gap-5 md:w-auto text-[20px] md:text-xl`}
+          } flex-col gap-1 py-5 absolute top-16 left-0 w-full bg-white md:flex md:flex-row md:static md:py-0 md:gap-5 md:w-auto text-[20px] md:text-xl `}
         >
-          <Link to={"/faq"}>
-            <p className="mx-auto mt-[-20px] md:mt-0 md:mx-0">About</p>
-          </Link>
-          <Link to={"/promo"}>
-            <p className="mx-auto md:mx-0">Promo</p>
-          </Link>
-          <Link to={"/category"}>
-            <p className="mx-auto md:mx-0">Category</p>
-          </Link>
-          <Link to={"/activity"}>
-            <p className="mx-auto md:mx-0">Activity</p>
-          </Link>
+          <div className="flex flex-col md:flex-row md:gap-5 mx-auto items-center">
+            <Link to={"/faq"}>
+              <p className="mx-auto mt-[-20px] md:mt-0 md:mx-0 ">About</p>
+            </Link>
+            <Link to={"/promo"}>
+              <p className="mx-auto md:mx-0">Promo</p>
+            </Link>
+            <Link to={"/category"}>
+              <p className="mx-auto md:mx-0">Category</p>
+            </Link>
+            <Link to={"/activity"}>
+              <p className="mx-auto md:mx-0">Activity</p>
+            </Link>
+          </div>
 
           {/* Tampilkan keranjang hanya jika yang login adalah user */}
           {isLoggedIn && userRole === "user" && (

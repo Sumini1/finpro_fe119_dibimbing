@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchGetBanners } from "../../reducer/bannerSlice";
 import { TECarousel, TECarouselItem } from "tw-elements-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { RiArrowGoForwardLine } from "react-icons/ri";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
 import { useParams, Link } from "react-router-dom";
 import { RiArrowGoBackLine } from "react-icons/ri";
 
@@ -65,9 +60,11 @@ const GetBanners = () => {
                   <p className="mb-3 text-xl font-extrabold md:text-3xl md:mb-5">
                     Lets Explore The World
                   </p>
-                  <button className="px-4 py-2 mb-2 font-bold text-black bg-white rounded md:mb-7">
-                    Book Now
-                  </button>
+                  <Link to={"/activity"}>
+                    <button className="px-4 py-2 mb-2 font-bold text-black bg-white rounded md:mb-7">
+                      Book Now
+                    </button>
+                  </Link>
                 </div>
               </TECarouselItem>
             ))

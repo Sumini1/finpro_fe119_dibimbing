@@ -113,7 +113,6 @@ export const fetchMyTransactions = createAsyncThunk(
 );
 
 // update transactions
-  
 export const fetchTransactionUpdate = createAsyncThunk(
   "transaction/fetchTransactionUpdate",
   async ({ id, proofPaymentUrl }) => {
@@ -145,6 +144,43 @@ export const fetchTransactionUpdate = createAsyncThunk(
         title: "Error",
         text: error.message,
       })
+      throw error;
+    }
+  }
+);
+
+// update status
+export const fetchStatusUpdate = createAsyncThunk(
+  "transaction/fetchStatusUpdate",
+  async ({ id, status }) => {
+    try {
+      const response = await fetch(
+        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/update-transaction-status/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify({
+            status: status,
+          }),
+        }
+      );
+      const result = await response.json();
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Transaction updated successfully",
+      });
+      return result;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+      });
       throw error;
     }
   }
@@ -211,7 +247,7 @@ const transactionSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
-     // fetch my transaction
+     // fetch update proof
      .addCase(fetchTransactionUpdate.pending, (state) => {
       state.status = "loading";
     })
@@ -223,6 +259,18 @@ const transactionSlice = createSlice({
       state.status = "failed";
       state.error = action.error.message;
     })
+    // fetch update status
+    .addCase(fetchStatusUpdate.pending, (state) => {
+      state.status = "loading";
+    })
+    .addCase(fetchStatusUpdate.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.message = action.payload.message;
+    })
+    .addCase(fetchStatusUpdate.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    });
   },
 });
 

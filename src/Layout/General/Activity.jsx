@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchActivity } from "../../reducer/activitySlice";
 import { IoStar } from "react-icons/io5";
 import{Link} from "react-router-dom"
+import { MdReviews } from "react-icons/md";
 
 const Activity = () => {
   const dispatch = useDispatch();
@@ -69,8 +70,12 @@ const Activity = () => {
                   <IoStar />
                   {activity?.rating}
                 </p>
-                <p className="mt-2 text-lg text-white md:text-xl">{`Reviews : ${activity?.total_reviews}`}</p>
-              </div>
+                <p className="mt-2 text-lg text-white md:text-x flex gap-2 a">
+                  <MdReviews className="mt-1" />
+
+                  {activity?.total_reviews}
+                </p>
+              </div> 
             </div>
           ))}
       </div>

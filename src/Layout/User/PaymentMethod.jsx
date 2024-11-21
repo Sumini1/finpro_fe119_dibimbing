@@ -3,14 +3,18 @@ import { useLocation, Link } from "react-router-dom";
 import { fetchPaymentMethod } from "../../reducer/paymentMethodSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/General/Navbar";
-import ModalCreateTransaction from "../../components/Users/ModalCreateTransaction";
+import { useNavigate } from "react-router-dom";
+import { fetchCreateTransaction } from "../../reducer/transactionSlice";
 
 const PaymentMethod = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { selectedCartItems } = location.state || { selectedCartItems: [] };
   const { data: paymentMethod } = useSelector((state) => state.paymentMethod);
   const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const toggleModalCreate = () => {
     setIsModalCreateOpen((prev) => !prev);
@@ -26,16 +30,31 @@ const PaymentMethod = () => {
     setSelectedMethod(methodId);
   };
 
-  // const handleSubmit = () => {
-  //   if (!selectedMethod) {
-  //     alert("Please select a payment method!");
-  //     return;
-  //   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
 
-  //   console.log("Selected Method:", selectedMethod);
-  //   console.log("Selected Items:", selectedCartItems);
-  //   // proses pembayaran
-  // };
+    // Dispatch API Create Transaction
+    dispatch(
+      fetchCreateTransaction({
+        cartIds: selectedCartItems.map((item) => item.id),
+        paymentMethodId: selectedMethod,
+      })
+    )
+      .unwrap()
+      .then(() => {
+        navigate("/my-transactions");
+      })
+      .catch((error) => {
+        setErrorMessage(
+          "Gagal membuat transaksi: " + (error.message || "Kesalahan server.")
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const formatToIDR = (amount) => {
     return new Intl.NumberFormat("id-ID", {
@@ -65,11 +84,13 @@ const PaymentMethod = () => {
             </li>
           ))}
         </ul>
-        <div className="mt-4">
-          <h2 className="font-semibold mt-4 mb-3 text-md md:text-xl">
+        {selectedCartItems.length > 0 && (
+          <>
+           <h2 className="font-semibold mt-4 mb-3 text-md md:text-xl">
             Choose Payment Method:
           </h2>
           <div className="grid grid-cols-2 gap-4">
+
             {paymentMethod.map((method) => (
               <div
                 key={method.id}
@@ -89,13 +110,21 @@ const PaymentMethod = () => {
               </div>
             ))}
           </div>
+          </>
+        )}
+        <div className="mt-4">
+         
           <div className="mt-2 flex gap-2">
-            <button
-              onClick={toggleModalCreate}
-              className="bg-green-600 text-white px-5 py-2 rounded-lg mt-4"
+            {selectedCartItems.length > 0 && (
+              <button
+              disabled={isLoading}
+              onClick={handleSubmit}
+              className="bg-blue-600 text-white px-5 py-2 rounded-lg mt-4"
             >
-              Create Transaction
+              {isLoading ? "Loading..." : "Create Transactions"}
             </button>
+            )}
+            
             <Link to={"/cart"}>
               <button className="bg-blue-600 text-white px-5 py-2 rounded-lg mt-4">
                 Back To Cart
@@ -104,13 +133,14 @@ const PaymentMethod = () => {
           </div>
         </div>
         {/* Modal */}
-        {isModalCreateOpen && (
+        {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+        {/* {isModalCreateOpen && (
           <ModalCreateTransaction
             toggleModalCreate={toggleModalCreate}
             cartIds={selectedCartItems.map((item) => item.id)}
             paymentMethodId={selectedMethod}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

@@ -36,7 +36,9 @@ export const fetchLogin = createAsyncThunk(
       return data;
     } catch (error) {
       Swal.fire({
+
         title: "Login Failed",
+         text: error.message,
         icon: "error",
         showConfirmButton: true,
       });

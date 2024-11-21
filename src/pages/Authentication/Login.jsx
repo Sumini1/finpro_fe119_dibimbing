@@ -23,8 +23,10 @@ const Login = () => {
       setErrorMessage("");
       await dispatch(fetchLogin({ email, password })).unwrap();
       navigate("/");
+      
     } catch (error) {
-      setErrorMessage("Login failed: " + error.message);
+      console.log("error", error)
+      setErrorMessage("Login failed: " + error);
     }
   };
 
@@ -39,10 +41,10 @@ const Login = () => {
         className="md:w-7/12 w-full bg-[url('/login.jpg')] bg-cover text-white flex flex-col justify-between font-sans"
       >
         <div className="px-8 pt-8 text-whitee font-edu">
-          <h2 className="text-2xl font-bold">TRAVELLING</h2>
+          <h2 className="text-2xl font-extrabold">TRAVELLING</h2>
         </div>
         <div className="bg-gradient-to-t from-black pl-8 pb-8 md:pr-[25%] text-white font-edu">
-          <p className="text-2xl md:text-4xl mb-4 md:mb-6 font-medium leading-tight md:leading-[75px] tracking-wide">
+          <p className="text-2xl md:text-4xl mb-4 md:mb-6  leading-tight md:leading-[75px] tracking-wide font-bold">
             TIME TO TRAVEL THE WORLD
           </p>
           <p className="text-sm md:text-md text-white font-edu">

@@ -77,23 +77,23 @@ const ModalUserUpdate = ({ isModalOpen, toggleModal, user }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative max-w-md p-4 bg-white rounded-lg shadow dark:bg-gray-700">
-        <div className="flex items-center justify-between pb-3 mb-4 border-b">
+      <div className="relative max-w-md p-4 bg-blue-700 rounded-lg shadow">
+        <div className="flex  justify-between pb-3 mb-4 border-b">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Update User
           </h3>
           <button
             onClick={toggleModal}
-            className="text-gray-400 hover:text-gray-900"
+            className="text-white "
           >
             &times;
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-4 text-start">
+          <div className="flex flex-col ">
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-900 dark:text-white"
+              className="block text-sm font-medium text-white"
             >
               Name
             </label>
@@ -141,7 +141,7 @@ const ModalUserUpdate = ({ isModalOpen, toggleModal, user }) => {
           <div>
             <label
               htmlFor="profilePictureUrl"
-              className="block text-sm font-medium text-gray-900 dark:text-white"
+              className="block text-sm font-medium text-white"
             >
               Profile Picture
             </label>
@@ -150,7 +150,7 @@ const ModalUserUpdate = ({ isModalOpen, toggleModal, user }) => {
               id="profilePictureUrl"
               name="profilePictureUrl"
               onChange={(e) => setFileImage(e.target.files[0])}
-              className="w-full p-2"
+              className="w-full p-2 text-white"
             />
           </div>
           <button

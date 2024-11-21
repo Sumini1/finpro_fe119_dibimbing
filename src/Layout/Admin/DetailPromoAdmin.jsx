@@ -4,6 +4,7 @@ import { fetchGetPromoById } from "../../reducer/promoByIdSlice";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/General/Navbar";
+import Footer from "../../components/General/Footer";
 
 const DetailPromoAdmin = () => {
   const { id } = useParams();
@@ -39,7 +40,7 @@ const DetailPromoAdmin = () => {
                     className="w-full h-auto rounded-lg "
                   />
                 </div>
-                <div className="flex flex-col gap-2 p-5 mt-1 md:p-10 md:mt-[50px]">
+                <div className="flex flex-col gap-2 p-5 mt-1 md:p-10 md:mt-[-30px]">
                   <h2 className="mb-2 text-xl font-semibold">
                     Title: {data.title}
                   </h2>
@@ -68,6 +69,7 @@ const DetailPromoAdmin = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
