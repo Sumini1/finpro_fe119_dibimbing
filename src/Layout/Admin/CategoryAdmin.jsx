@@ -174,7 +174,6 @@ const CategoryAdmin = () => {
           <ModalCreateCategory
             isModalOpen={isModalOpen}
             toggleModal={toggleModal}
-            // handleCloseModal={handleCloseModal}
           />
         )}
 

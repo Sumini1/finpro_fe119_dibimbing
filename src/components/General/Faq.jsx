@@ -4,7 +4,6 @@ const Faq = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-7 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 mt-[-120px] py-28 text-white ">
       <div className="flex flex-col w-full lg:flex-row lg:items-start lg:justify-between lg:gap-10 lg:p-24 lg:mt-[-20px]">
-        {/* Bagian H1 dan Gambar */}
         <div className="flex flex-col py-2 mb-3 lg:w-[50%] lg:mt-[-20px]">
           <h1 className="mb-8 text-2xl font-bold text-center lg:text-left lg:text-4xl ">
             Pertanyaan Yang Sering Ditanyakan

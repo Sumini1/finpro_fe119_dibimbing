@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchGetBannerById } from "../../reducer/bannerIdSlice";
 import {Link} from 'react-router-dom';
 import Navbar from '../../components/General/Navbar'; 
+import Footer from '../../components/General/Footer';
 
 const BannerById = () => {
   const { id } = useParams();
@@ -42,6 +43,7 @@ const BannerById = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

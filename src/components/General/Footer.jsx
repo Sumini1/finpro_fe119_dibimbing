@@ -48,7 +48,6 @@ const Footer = () => {
           <p>Hotel</p>
           <p>Kereta</p>
           <p>Pesawat</p>
-          <p>Kereta</p>
           <p>Tiket</p>
         </div>
         <div className="flex flex-col">
@@ -56,7 +55,6 @@ const Footer = () => {
           <p>Hotel</p>
           <p>Kereta</p>
           <p>Pesawat</p>
-          <p>Kereta</p>
           <p>Tiket</p>
         </div>
         <div className="flex flex-col">
@@ -72,7 +70,7 @@ const Footer = () => {
       <hr className="block text-xl font-bold text-gray-500 mt-7 " />
       <div className="flex flex-col  mx-auto md:flex-col mt-5 md:ml-[-800px] md:pt-64">
         {" "}
-        &copy; 2024 Sumini. All rights reserved
+        &copy; 2024 Holidays.In All rights reserved
       </div>
     </div>
   );

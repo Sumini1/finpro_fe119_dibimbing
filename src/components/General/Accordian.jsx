@@ -36,39 +36,39 @@ const Accordian = ({ question, answer }) => {
 const FAQ = () => {
   const faqData = [
     {
-      question: "Apa itu Jelajah Wisata ?",
+      question: "Apa itu Holidays.In ?",
       answer:
-        "Madinah Salam adalah flatform pembelajaran online yang menyediakan berbagai program pembelajaran interaktif untuk semua kalangan dari anak hingga dewasa sesuai Al-Qur'an dan As Sunnah.",
+        "Holidays.In adalah Salah satu perusahaan online travel erbesar di Indonesia yang menyediakan berbagai kebutuhan perjalanan secara online:",
     },
     {
-      question: "Kenapa harus Jelajah Wisata?",
+      question: "Kenapa harus Holidays.In?",
       answer:
-        "Media pembelajaran interaktif secara online bukan rekaman, materi pembelajaram terstruktur dan terupdate, serta dinamis sesuai kebutuhan. Kita tidak hanya belajar ilmu syar'i tetapi juga ilmu pengetahuan umum.",
+        "Selalu ada promo setaip harinya, pemesanan cepat, dan harga terbaik",
     },
     {
       question: "Bagaimmana cara mendapatkan promo-nya ?",
       answer:
-        "Proram Diploma Bahasa Arab, Diploma Ilmu Syariah, Program Kursus Madinah Salam, program Diploma Qur'an, dan Program S1 Resmi Madinah Salam.",
+        " Anda dapat menghubungi kami melalui whatsapp di nomor 0822 1111 1111 atau media sosial kami tertera di website kami",
     },
     {
-      question: "Benefit apa saja yang akan pelanggan dapatkan jika pilih Jelajah Wisata?",
-      answer:
-        "Cara belajarnya online via zoom bersama assatidzah dan guru-guru yang kompetent di bidangnya, tersedia UTS dan UAS.  Dan sertifikat apabila telah menyelesaikan satu jurusan dalam satu program",
+      question:
+        "Benefit apa saja yang akan pelanggan dapatkan jika pilih Holidays.In?",
+      answer: "Diskon selama 50%, pemesanan cepat, dan harga terbaik",
     },
     {
       question: "Bagaimana cara pemesanannya?",
       answer:
-        "Ada beasiswa dengan kriteria tertentu, semua program kecuali program S1",
+        "Anda dapat menghubungi kami melalui whatsapp di nomor 0822 1111 1111 atau media sosial kami tertera di website kami",
     },
     {
       question: "Apakah bisa refund jika tidak jadi menggunakan tiketnya",
       answer:
-        "Ya, jika anda menyelesaikan program S1 resmi Madinah Salam, anda akan mendapatkan ijazah resmi",
+        "Ya, anda bisa refund jika tidak jadi menggunakan tiketnya dengan cara menghubungi kami melalui whatsapp di nomor 0822 1111 1111 atau media sosial kami tertera di website kami",
     },
     {
       question: "Apakah tersedia berbagai pembayaran ?",
       answer:
-        "Anda dapat menghubungi kami melalui whatsapp di nomor 0822 1111 1111 atau media sosial kami tertera di website kami",
+        "Ya, kami menyediakan 4 virtual account yang tersedia, yaitu Bank BNI, Bank BRI, Bank BCA, dan Bank Mandiri",
     },
   ];
 

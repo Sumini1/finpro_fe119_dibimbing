@@ -39,7 +39,7 @@ const ActivitiesAdmin = () => {
   // Total halaman
   const totalPages = Math.ceil(filteredActivity.length / activitiesPerPage);
 
-  // Fungsi untuk berpindah halaman
+ 
   const goToPreviousPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };

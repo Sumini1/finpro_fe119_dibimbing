@@ -47,10 +47,9 @@ const Login = () => {
           <p className="text-2xl md:text-4xl mb-4 md:mb-6  leading-tight md:leading-[75px] tracking-wide font-bold">
             TIME TO TRAVEL THE WORLD
           </p>
-          <p className="text-sm md:text-md text-white font-edu">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-            dignissimos nam optio eius delectus possimus nostrum dolores amet
-            maiores corporis!
+          <p className="text-sm md:text-lg text-white font-edu">
+            Liburan Menjadi Mudah dan Menyenangkan...
+            Nikmati hari liburmu bersama keluarga tercinta
           </p>
         </div>
       </div>

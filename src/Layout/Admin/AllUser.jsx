@@ -27,12 +27,6 @@ const AllUser = () => {
     setSearchQuery(event.target.value);
   };
 
-  // const handleSearch = () => {
-  //   // Logika pencarian bisa diterapkan di sini
-  //   setCurrentPage(1); // Reset halaman ke 1 setelah pencarian
-  // };
-
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -73,7 +67,7 @@ const AllUser = () => {
         <CiSearch />
         <input
           type="text"
-          placeholder="Cari berdasarkan nama..."
+          placeholder="Cari berdasarkan nama user..."
           value={searchQuery}
           onChange={handleInputChange}
           // onKeyPress={handleKeyPress} // Trigger search on Enter

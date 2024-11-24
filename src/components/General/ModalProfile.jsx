@@ -33,7 +33,7 @@ const ModalProfile = ({ onClose, handleLogout }) => {
       {userRole === "user" && (
         <Link to={"/my-transactions"}>
           <p className="block px-4 py-2 text-sm text-gray-700">
-            My Transaction
+            My Transactions
           </p>
         </Link>
       )}

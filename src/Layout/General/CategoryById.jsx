@@ -4,6 +4,7 @@ import { fetchGetCategoryById } from '../../reducer/categoryByIdSlice';
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import Navbar from '../../components/General/Navbar'; 
+import Footer from '../../components/General/Footer';
 
 const CategoryById = () => {
     const { id } = useParams();
@@ -40,6 +41,7 @@ const CategoryById = () => {
           </button>
         </Link>
       </div>
+      <Footer />
 </div>
     );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {useDispatch, useSelector} from "react-redux"
 import { fetchStatusUpdate } from "../../reducer/transactionSlice";
 
-const ModalUpdateStatus = ({isModalOpen, toggleModal, transactionId, transaction }) => {
+const ModalUpdateStatus = ({ toggleModal, transactionId }) => {
     const dispatch = useDispatch();
 
     const [formData, setFormData] = useState({

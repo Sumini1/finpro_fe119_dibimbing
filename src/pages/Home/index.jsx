@@ -18,7 +18,6 @@ const Home = () => {
             <Activity />
             <Faq />
             <Footer />
-            {/* <ErrorPage /> */}
         </div>
     );
 };

@@ -5,7 +5,6 @@ import { fetchUpdateUserRole } from "../../reducer/updateUserRoleSlice";
 import { fetchGetAllUsers } from "../../reducer/allUserSlice";
 
 const ModalUpdateUserRole = ({ handleRole, isModalRoleOpen, userId, role}) => {
-  // tambahkan userId sebagai props
   const dispatch = useDispatch();
   const updateUserRoleStatus = useSelector((state) => state.updateUserRole);
   const [form, setForm] = useState({ role: role || "" });
@@ -23,7 +22,7 @@ const ModalUpdateUserRole = ({ handleRole, isModalRoleOpen, userId, role}) => {
       .then(() => {
         dispatch(fetchGetAllUsers());
         Swal.fire("Role updated!", "User role has been updated.", "success");
-        handleRole(); // Tutup modal setelah sukses
+        handleRole(); 
       })
       .catch(() => {
         Swal.fire("Update failed", "Failed to update user role.", "error");

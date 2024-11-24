@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchGetPromoById } from "../../../reducer/promoByIdSlice";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "../../../components/General/Navbar";
+import Footer from "../../../components/General/Footer";
 
 const PromoById = () => {
   const { id } = useParams();
@@ -71,6 +72,7 @@ const PromoById = () => {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

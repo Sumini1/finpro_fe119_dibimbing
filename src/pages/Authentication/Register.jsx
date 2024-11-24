@@ -90,10 +90,9 @@ const Register = () => {
           <p className="text-2xl md:text-4xl mb-4 md:mb-6 font-medium leading-tight md:leading-[75px] tracking-wide">
             TIME TO TRAVEL THE WORLD
           </p>
-          <p className="text-sm md:text-md ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-            dignissimos nam optio eius delectus possimus nostrum dolores amet
-            maiores corporis!
+          <p className="text-sm md:text-lg ">
+            Liburan Menjadi Mudah dan Menyenangkan... Nikmati hari liburmu
+            bersama keluarga tercinta
           </p>
         </div>
       </div>

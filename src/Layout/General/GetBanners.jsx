@@ -75,7 +75,6 @@ const GetBanners = () => {
       </TECarousel>
 
       {/* Kontrol Panah */}
-
       <div className="absolute left-12  md:left-10 transform -translate-y-1/2 top-[270px] md:top-[450px]">
         <button
           className="bg-transparent border-0"

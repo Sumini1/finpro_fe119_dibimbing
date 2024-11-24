@@ -22,7 +22,7 @@ const Navbar = () => {
   useEffect(() => {
     if (isLoggedIn) {
       dispatch(fetchCart());
-      dispatch(fetchGetLoggedUser()); // Ambil data user jika sudah login
+      dispatch(fetchGetLoggedUser());
     }
   }, [isLoggedIn, dispatch]);
 

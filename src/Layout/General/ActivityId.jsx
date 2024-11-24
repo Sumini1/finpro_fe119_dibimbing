@@ -4,7 +4,7 @@ import { Link, useParams,  useNavigate} from "react-router-dom";
 import { fetchGetActivityById } from "../../reducer/activityIdSlice";
 import Navbar from "../../components/General/Navbar";
 import { fetchAddToCart, fetchCart } from "../../reducer/cartSlice";
-
+import Footer from "../../components/General/Footer";
 
 const ActivityId = () => {
   const dispatch = useDispatch();
@@ -106,6 +106,7 @@ const ActivityId = () => {
           <p>No activity found.</p>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

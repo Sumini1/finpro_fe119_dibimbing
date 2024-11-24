@@ -65,9 +65,9 @@ const ModalUpdatePromo = ({toggleModal, promo, promoId }) => {
         
         setFormData((prevData) => ({
           ...prevData,
-          promo_discount_price: parseInt(prevData.promo_discount_price, 10), // Ubah ke integer
-          minimum_claim_price: parseInt(prevData.minimum_claim_price, 10), // Ubah ke integer
-          imageUrl, // Pastikan imageUrl yang terbaru dikirim
+          promo_discount_price: parseInt(prevData.promo_discount_price, 10), 
+          minimum_claim_price: parseInt(prevData.minimum_claim_price, 10), 
+          imageUrl, 
         }));
       } catch (error) {
         console.error(error);
@@ -76,9 +76,9 @@ const ModalUpdatePromo = ({toggleModal, promo, promoId }) => {
     }
     const promoData = {
       ...formData,
-      promo_discount_price: parseInt(formData.promo_discount_price, 10), // Ubah ke integer
-      minimum_claim_price: parseInt(formData.minimum_claim_price, 10), // Ubah ke integer
-      imageUrl, // Pastikan imageUrl yang terbaru dikirim
+      promo_discount_price: parseInt(formData.promo_discount_price, 10), 
+      minimum_claim_price: parseInt(formData.minimum_claim_price, 10),
+      imageUrl, 
     };
     try {
       await dispatch(fetchUpdatePromo({id : promoId, promoData }));

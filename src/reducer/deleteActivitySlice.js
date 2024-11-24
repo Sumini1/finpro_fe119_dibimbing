@@ -63,7 +63,7 @@ const deleteActivitySlice = createSlice({
         })
         .addCase(fetchDeleteActivity.rejected, (state, action) => {
             state.isLoading = false;
-            state.message = action.payload || "Error deleting activity";
+            state.message = action.error.message || "Error deleting activity";
         });
     }
 })

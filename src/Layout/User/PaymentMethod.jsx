@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/General/Navbar";
 import { useNavigate } from "react-router-dom";
 import { fetchCreateTransaction } from "../../reducer/transactionSlice";
+import Footer from "../../components/General/Footer";
 
 const PaymentMethod = () => {
   const location = useLocation();
@@ -142,6 +143,7 @@ const PaymentMethod = () => {
           />
         )} */}
       </div>
+      <Footer />
     </div>
   );
 };

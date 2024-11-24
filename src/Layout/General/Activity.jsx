@@ -31,7 +31,7 @@ const Activity = () => {
   }
 
   return (
-    <div className="p-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-20 md:mt-[-40px]">
+    <div className="p-5 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 md:p-20 md:mt-[-40px] min-h-screen ">
       <div className="mb-5 text-2xl text-white md:text-2xl md:mb-5">
         <h2>Bosen ? </h2>
         <p className="md:mb-10">Cobain Aktivitas ini yuk..</p>

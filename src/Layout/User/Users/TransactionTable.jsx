@@ -43,13 +43,10 @@ const TransactionTable = () => {
     if (currentPage < totalPages) setCurrentPage(currentPage + 1);
   };
 
-  // Fungsi untuk berpindah ke halaman sebelumnya
   const goToPreviousPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
-  // Handle perubahan input pencarian
-  // Handle perubahan input pencarian
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -78,7 +75,7 @@ const TransactionTable = () => {
           <CiSearch className="mx-5 mt-1" />
           <input
             type="text"
-            placeholder="Cari berdasarkan nama..."
+            placeholder="Cari berdasarkan nama activity..."
             value={searchQuery}
             onChange={handleInputChange}
             className="w-64 py-0 text-black rounded-full outline-none bg-slate-100"
@@ -191,7 +188,7 @@ const TransactionTable = () => {
       {/* Modal Update Status */}
       {isModalOpen && (
         <ModalupdateStatus
-          isModalOpen={isModalOpen}
+          // isModalOpen={isModalOpen}
           toggleModal={setIsModalOpen}
           transactionId={selectedTransaction?.id}
         />

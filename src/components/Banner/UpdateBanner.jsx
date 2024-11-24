@@ -15,7 +15,7 @@ const UpdateBanner = ({ bannerId, toggleModal, banner }) => {
   const [fileImage, setFileImage] = useState(null);
   const [formData, setFormData] = useState({
     name: banner?.name || "",
-    imageUrl: banner?.imageUrl || "", // pastikan imageUrl ada di formData
+    imageUrl: banner?.imageUrl || "", 
   });
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -37,14 +37,12 @@ const UpdateBanner = ({ bannerId, toggleModal, banner }) => {
       return;
     }
 
-    // Siapkan FormData untuk upload gambar jika ada gambar baru
-    let imageUrl = formData.imageUrl; // Gunakan imageUrl dari formData terlebih dahulu
+    let imageUrl = formData.imageUrl; 
     if (fileImage) {
       const formDataImage = new FormData();
       formDataImage.append("image", fileImage);
 
       try {
-        // Upload gambar dan dapatkan URL-nya
         const imageUploadResponse = await axios.post(
           "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
           formDataImage,
@@ -57,12 +55,12 @@ const UpdateBanner = ({ bannerId, toggleModal, banner }) => {
             },
           }
         );
-        imageUrl = imageUploadResponse.data.url; // Gambar berhasil di-upload, simpan URL-nya
+        imageUrl = imageUploadResponse.data.url; 
 
         // Update formData dengan imageUrl yang baru
         setFormData((prevData) => ({
           ...prevData,
-          imageUrl, // Pastikan imageUrl yang baru tersimpan di state formData
+          imageUrl, 
         }));
       } catch (error) {
         setErrorMessage("Failed to upload image.");
