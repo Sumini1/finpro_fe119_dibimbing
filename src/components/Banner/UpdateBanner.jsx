@@ -79,7 +79,7 @@ const UpdateBanner = ({ bannerId, toggleModal, banner }) => {
     try {
       await dispatch(fetchUpdateBanner({ id: bannerId, bannerData }));
       dispatch(fetchGetBanners()); 
-      navigate("/banners"); 
+      // navigate("/banners"); 
       toggleModal(); 
     } catch (error) {
       setErrorMessage("Failed to update banner.");

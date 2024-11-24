@@ -38,22 +38,19 @@ const MyTransactions = () => {
           My Transactions
         </h1>
         {myTransactions.map((transaction) => (
-          <div
-            key={transaction.id}
-            className="flex flex-col p-5 text-lg order-2"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-3 md:gap-3 mb-3 shadow-lg md:mx-10">
+          <div key={transaction.id} className="grid grid-cols-1 md:grid-cols-3 p-5 text-lg order-2 ">
+            <div className=" md:gap-3 mb-3  md:mx-10 ">
               {transaction?.transaction_items?.map((item) => (
                 <div
                   key={item.id}
-                  className="p-5 flex flex-col text-lg order-1"
+                  className="p-5 flex flex-col text-lg order-1 shadow-lg rounded-md bg-blue-600  "
                 >
                   <p>{`Name Activity: ${item.title}`}</p>
                   <p>{`Description: ${item.description}`}</p>
                   <p>{`Price: ${formatToIDR(item.price)}`}</p>
                   <p>{`Discount: ${formatToIDR(item.price_discount)}`}</p>
                   <p>{`Quantity: ${item.quantity}`}</p>
-                  <p >{`Proof Payment Url : ${transaction.proofPaymentUrl}`}</p>
+                  <p>{`Proof Payment Url : ${transaction.proofPaymentUrl}`}</p>
                   <div className="flex">
                     <button
                       onClick={() => toggleModalOpen(transaction)}

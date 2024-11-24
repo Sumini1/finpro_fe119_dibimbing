@@ -83,7 +83,7 @@ const ModalUpdatePromo = ({toggleModal, promo, promoId }) => {
     try {
       await dispatch(fetchUpdatePromo({id : promoId, promoData }));
       dispatch(fetchGetPromos());
-      navigate("/promo");
+      // navigate("/promo");
       toggleModal();
     } catch (error) {
       setErrorMessage(error.message);

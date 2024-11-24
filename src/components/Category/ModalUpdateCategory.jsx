@@ -74,7 +74,7 @@ const ModalUpdateCategory = ({ category, categoryId, toggleModal }) => {
     try {
       await dispatch(fetchUpdateCategory({ id: categoryId, categoryData }));
       dispatch(fetchGetCategories());
-      navigate("/category");
+      // navigate("/category");
       toggleModal();
     } catch (error) {
       setErrorMessage(error);

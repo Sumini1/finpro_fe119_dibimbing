@@ -15,9 +15,6 @@ const PaymentMethod = () => {
   const { data: paymentMethod } = useSelector((state) => state.paymentMethod);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
-
-
   const [selectedMethod, setSelectedMethod] = useState(null);
 
   useEffect(() => {
@@ -111,7 +108,6 @@ const PaymentMethod = () => {
           </>
         )}
         <div className="mt-4">
-         
           <div className="mt-2 flex gap-2">
             {selectedCartItems.length > 0 && (
               <button
@@ -132,13 +128,6 @@ const PaymentMethod = () => {
         </div>
         {/* Modal */}
         {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-        {/* {isModalCreateOpen && (
-          <ModalCreateTransaction
-            toggleModalCreate={toggleModalCreate}
-            cartIds={selectedCartItems.map((item) => item.id)}
-            paymentMethodId={selectedMethod}
-          />
-        )} */}
       </div>
       <Footer />
     </div>
