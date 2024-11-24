@@ -13,13 +13,10 @@ const PaymentMethod = () => {
   const navigate = useNavigate();
   const { selectedCartItems } = location.state || { selectedCartItems: [] };
   const { data: paymentMethod } = useSelector((state) => state.paymentMethod);
-  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const toggleModalCreate = () => {
-    setIsModalCreateOpen((prev) => !prev);
-  };
+
 
   const [selectedMethod, setSelectedMethod] = useState(null);
 
