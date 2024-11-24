@@ -78,9 +78,9 @@ export const fetchCreateTransaction = createAsyncThunk(
     } catch (error) {
       // console.error(error);
       Swal.fire({
-        title: "Create Transaction Failed",
+        title: "Choose Payment Method",
         icon: "error",
-        text: error.message,
+        // text: error.message,
         showConfirmButton: true,
       });
       throw error;

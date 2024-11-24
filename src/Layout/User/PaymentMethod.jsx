@@ -49,7 +49,7 @@ const PaymentMethod = () => {
       })
       .catch((error) => {
         setErrorMessage(
-          "Gagal membuat transaksi: " + (error.message || "Kesalahan server.")
+          "Choose Payment Method "  || "Kesalahan server."
         );
       })
       .finally(() => {
