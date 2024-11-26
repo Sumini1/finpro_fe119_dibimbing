@@ -18,6 +18,13 @@ const CategoryAdmin = () => {
   const deleteStatus = useSelector((state) => state.deleteCategory);
   console.log("Delete status:", deleteStatus);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchQueryAdmin, setSearchQueryAdmin] = useState("");
+
+  const filteredCategoryAdmin = data.filter((category) =>
+    category.name
+      ? category.name.toLowerCase().includes(searchQueryAdmin.toLowerCase())
+      : false
+  );
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);

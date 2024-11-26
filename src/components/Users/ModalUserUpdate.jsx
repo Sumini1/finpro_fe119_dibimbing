@@ -103,13 +103,13 @@ const ModalUserUpdate = ({ isModalOpen, toggleModal, user }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-black"
             />
           </div>
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-900 dark:text-white"
+              className="block text-sm font-medium text-white"
             >
               Email
             </label>
@@ -119,7 +119,7 @@ const ModalUserUpdate = ({ isModalOpen, toggleModal, user }) => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-black"
             />
           </div>
           <div>
@@ -135,7 +135,7 @@ const ModalUserUpdate = ({ isModalOpen, toggleModal, user }) => {
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded text-black"
             />
           </div>
           <div>

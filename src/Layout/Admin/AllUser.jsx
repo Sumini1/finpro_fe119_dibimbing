@@ -13,6 +13,11 @@ const AllUser = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 10;
+  const [searchQueryAdmin, setSearchQueryAdmin] = useState("");
+
+  const filteredUserAdmin = data.filter((user) =>
+    user.name.toLowerCase().includes(searchQueryAdmin.toLowerCase())
+  );
 
   useEffect(() => {
     dispatch(fetchGetAllUsers());
@@ -59,7 +64,7 @@ const AllUser = () => {
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <h1 className="py-5 font-['Roboto Condensed'] text-md md:text-xl">
+      <h1 className="py-5 font-['Roboto Condensed'] text-md md:text-xl mx-5">
         Halaman Users
       </h1>
 

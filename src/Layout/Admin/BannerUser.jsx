@@ -17,7 +17,13 @@ const BannerUser = () => {
   const [isModalUpdateBanner, setIsModalUpdateBanner] = useState(false);
   const [updateBanner, setUpdateBanner] = useState(null);
    const [searchQuery, setSearchQuery] = useState("");
+   const [searchQueryAdmin, setSearchQueryAdmin] = useState("");
 
+   const filteredBannerAdmin = data.filter((banner) =>
+    banner.name
+      ? banner.name.toLowerCase().includes(searchQueryAdmin.toLowerCase())
+      : false
+  );
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);

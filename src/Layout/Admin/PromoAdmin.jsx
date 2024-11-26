@@ -16,6 +16,13 @@ const PromoAdmin = () => {
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
   const [selectedPromo, setSelectedPromo] = useState(null);
    const [searchQuery, setSearchQuery] = useState("");
+   const [searchQueryAdmin, setSearchQueryAdmin] = useState("");
+
+   const filteredPromoAdmin = data.filter((promo) =>
+    promo.title
+      ? promo.title.toLowerCase().includes(searchQueryAdmin.toLowerCase())
+      : false
+  );
 
     const handleInputChange = (event) => {
       setSearchQuery(event.target.value);

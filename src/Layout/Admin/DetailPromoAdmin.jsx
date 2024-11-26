@@ -30,6 +30,7 @@ const DetailPromoAdmin = () => {
         <div className="text-lg text-white">
           {isLoading && <p>Loading...</p>}
           {message && <p>Error: {message}</p>}
+          <h1 className="mb-5 text-2xl md:text-3xl font-bold md:mx-56"  >Detail Promo Admin Page</h1>
           {data ? (
             <div className="flex flex-col items-center justify-center shadow-lg ">
               <div className="flex flex-col gap-2 md:flex-row md:mb-5">
@@ -45,7 +46,7 @@ const DetailPromoAdmin = () => {
                     Title: {data.title}
                   </h2>
                   <p>{`Code Promo: ${data?.promo_code}`}</p>
-                  <p>{`Diskon: ${data?.terms_condition}`}</p>
+                  <p className="w-[350px]">{`Diskon: ${data?.terms_condition}`}</p>
                   <p>{data.description}</p>
                   <p>{`Potongan Diskon: ${formatToIDR(
                     data?.promo_discount_price

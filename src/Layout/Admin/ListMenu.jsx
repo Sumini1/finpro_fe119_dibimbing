@@ -11,12 +11,12 @@ import { IoHome } from "react-icons/io5";
 import Sidebar from "./Sidebar";
 
 const ListMenu = ({closeSidebar}) => {
-  const location = useLocation();
+    const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
-  };
+  // const toggleSidebar = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   const isActive = (path) =>
     location.pathname === path ? "bg-blue-800" : "text-white";

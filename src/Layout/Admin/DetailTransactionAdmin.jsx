@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchTransactionById } from "../../reducer/transactionSlice";
 import Navbar from "../../components/General/Navbar";
 import { useParams, Link } from "react-router-dom";
+import  Footer from "../../components/General/Footer";
 
 const DetailTransactionAdmin = () => {
   const { id } = useParams();
@@ -23,14 +24,14 @@ const DetailTransactionAdmin = () => {
     <div>
       <Navbar />
       <div className="min-h-screen p-5  bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
-        <div className="flex flex-col py-5 md:mx-10  text-md text-white ">
-          <h1 className="text-2xl md:text-3xl mb-2 md:mb-5 md:mt-10">
-            Detail Transaction
+        <div className="flex flex-col md:mx-10  text-md text-white ">
+          <h1 className="text-2xl md:text-3xl mb-2 md:mb-7 md:mt-10">
+            Detail Transaction Admin
           </h1>
           {/* <h1>User Id : {id}</h1> */}
           {transactionDetail ? (
-            <div className="grid grid-cols-1 md:grid-cols-3  shadow-lg  rounded-lg gap-x-10 md:py-5 ">
-              <div className="flex flex-col md:mx-5 mb-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 bg-blue-700  shadow-lg  rounded-lg gap-x-10 md:py-5 ">
+              <div className="flex flex-col mx-3 md:mx-5 mb-5 w-full md:w-[400px]">
                 <h1 className="text-xl mb-2">Detai User</h1>
                 <p className="">{`User Id : ${transactionDetail.userId}`}</p>
                 <p>{`Payment Mehod : ${transactionDetail?.paymentMethodId}`}</p>
@@ -42,14 +43,14 @@ const DetailTransactionAdmin = () => {
                 <p>{`Created At : ${transactionDetail?.createdAt}`}</p>
                 <p>{`Update At : ${transactionDetail?.updatedAt}`}</p>
               </div>
-              <div className="flex flex-col mb-5">
+              <div className="flex flex-col mb-5 mx-3  w-full md:w-[400px]">
                 <h1 className="text-xl mb-2">Payment Method</h1>
                 <p>{`Payment method Id : ${transactionDetail?.payment_method?.id}`}</p>
                 <p>{`Payment method Name : ${transactionDetail?.payment_method?.name}`}</p>
                 <p>{`Virtual Account Number : ${transactionDetail?.payment_method?.virtual_account_number}`}</p>
                 <p>{`Virtual Account Name : ${transactionDetail?.payment_method?.virtual_account_name}`}</p>
               </div>
-              <div className="flex flex-col mb-5">
+              <div className="flex flex-col mb-5 mx-3 w-full md:w-[400px]">
                 {transactionDetail?.transaction_items?.map((item, index) => (
                   <div>
                     <h1 className=" text-xl mb-2">Transaction Item</h1>
@@ -57,7 +58,7 @@ const DetailTransactionAdmin = () => {
                       key={index}
                       src={item.imageUrls[0]}
                       alt={`Image ${index}`}
-                      className="w-32 h-32 object-cover"
+                      className="w-32 h-32 object-cover rounded-xl"
                     />
                     <p>{`Transaction Item id : ${item?.id}`}</p>
                     <p>{`Title : ${item?.title}`}</p>
@@ -81,6 +82,7 @@ const DetailTransactionAdmin = () => {
           </Link>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import ListMenu from "./ListMenu";
+import NavbarAdmin from "../../components/General/NavbarAdmin";
+// import Breadcrumb from "../../components/General/Breadcrumb";
 
 const Sidebar = ({ children }) => {
   const [sidebarVisible, setSidebarVisible] = useState(false);
-   const closeSidebar = () => setSidebarVisible(false);
+  const closeSidebar = () => setSidebarVisible(false);
+
+ 
 
   return (
     <div>
@@ -36,8 +40,12 @@ const Sidebar = ({ children }) => {
         <ListMenu closeSidebar={closeSidebar} />
       </aside>
 
-      <div className="p-4 sm:ml-64">
-        <div>{children}</div>
+      <div className=" sm:ml-64">
+        <div className=" text-white p-4 bg-gradient-to-r from-blue-800 via-blue-600 to-blue-800 text-xl w-full h-full sticky top-0 z-50 hidden md:block">
+          {/* <Breadcrumb paths={breadcrumbPaths} /> */}
+          <NavbarAdmin />
+        </div>
+        <div className="p-5">{children}</div>
       </div>
     </div>
   );

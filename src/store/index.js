@@ -25,6 +25,7 @@ import paymentMethodReducer from "../reducer/paymentMethodSlice";
 import logoutReducer from "../reducer/logoutSlice";
 import cartReducer from "../reducer/cartSlice";
 import transactionReducer from "../reducer/transactionSlice";
+import  searchReducer from "../reducer/searchSlice"
 
 export const store = configureStore({
   reducer: {
@@ -54,5 +55,6 @@ export const store = configureStore({
     logout: logoutReducer,
     cart: cartReducer,
     transaction: transactionReducer,
+    search: searchReducer
   },
 });

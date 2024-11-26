@@ -16,6 +16,13 @@ const TransactionTable = () => {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const transactionsPerPage = 10;
+  const [searchQueryAdmin, setSearchQueryAdmin] = useState("");
+
+  const filteredTransactionAdmin = transactions.filter((transaction) =>
+    transaction.transaction_items?.some((item) =>
+      item.title.toLowerCase().includes(searchQueryAdmin.toLowerCase())
+    )
+  );
 
   // Filter transaksi berdasarkan query pencarian
   const filteredTransactions = transactions.filter((transaction) =>

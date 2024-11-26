@@ -19,6 +19,13 @@ const ActivitiesAdmin = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const activitiesPerPage = 10;
+  const [searchQueryAdmin, setSearchQueryAdmin] = useState("");
+
+  const filteredActivityAdmin = data.filter((activity) =>
+    activity.title
+      ? activity.title.toLowerCase().includes(searchQueryAdmin.toLowerCase())
+      : false
+  );
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);

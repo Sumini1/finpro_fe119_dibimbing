@@ -34,7 +34,7 @@ const MyTransactions = () => {
     <div>
       <Navbar />
       <div className="grid bg-gradient-to-tr from-blue-700 via-blue-500 to-blue-700 text-white ">
-        <h1 className="text-2xl mx-5 md:mx-10 md:text-3xl mt-5">
+        <h1 className="text-2xl mx-5 md:mx-14 md:text-3xl mt-5 mb-5">
           My Transactions
         </h1>
         {myTransactions.map((transaction) => (
