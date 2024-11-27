@@ -149,6 +149,40 @@ export const fetchTransactionUpdate = createAsyncThunk(
   }
 );
 
+// cancel transactions
+export const fetchTransactionCancel = createAsyncThunk(
+  "transaction/fetchTransactionCancel",
+  async ({ id }) => {
+    try {
+      const response = await fetch(
+        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/cancel-transaction/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
+      const result = await response.json();
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Transaction canceled successfully",
+      });
+      return result;
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+      });
+      throw error;
+    }
+  }
+);
+
 // update status
 export const fetchStatusUpdate = createAsyncThunk(
   "transaction/fetchStatusUpdate",
@@ -268,6 +302,18 @@ const transactionSlice = createSlice({
       state.message = action.payload.message;
     })
     .addCase(fetchStatusUpdate.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    })
+    // fetch cancel transaction
+    .addCase(fetchTransactionCancel.pending, (state) => {
+      state.status = "loading";
+    })
+    .addCase(fetchTransactionCancel.fulfilled, (state, action) => {
+      state.status = "succeeded";
+      state.message = action.payload.message;
+    })
+    .addCase(fetchTransactionCancel.rejected, (state, action) => {
       state.status = "failed";
       state.error = action.error.message;
     });

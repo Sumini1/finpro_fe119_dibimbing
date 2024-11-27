@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams,  useNavigate} from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { fetchGetActivityById } from "../../reducer/activityIdSlice";
 import Navbar from "../../components/General/Navbar";
 import { fetchAddToCart, fetchCart } from "../../reducer/cartSlice";
@@ -15,16 +15,27 @@ const ActivityId = () => {
   const userRole = useSelector((state) => state.loggedUser?.data?.role);
 
   const handleCart = () => {
-   if (!  isLoggedIn) {
-    navigate("/login")
-   } else if (userRole === "admin") {
-    navigate("/login")
-   } else {
-    dispatch(fetchAddToCart(data));
-    dispatch(fetchCart());
-   }
+    if (isLoggedIn) {
+      dispatch(fetchAddToCart(data.id))
+        .unwrap()
+        .then(() => {
+          dispatch(fetchCart());
+        });
+    } else {
+      navigate("/login");
+    }
+    if (!isLoggedIn) {
+      navigate("/login");
+    } else if (userRole !== "user") {
+      navigate("/login");
+    } else {
+      dispatch(fetchAddToCart(data))
+        .unwrap()
+        .then(() => {
+          dispatch(fetchCart());
+        });
+    }
   };
-
 
   useEffect(() => {
     dispatch(fetchGetActivityById(id));
@@ -53,7 +64,9 @@ const ActivityId = () => {
 
             {data.imageUrls && data.imageUrls.length > 0 && (
               <div className="flex flex-col ">
-                <h1 className="text-xl font-bold md:text-2xl mb-5 md:mb-7">Halaman Detail Activity</h1>
+                <h1 className="text-xl font-bold md:text-2xl mb-5 md:mb-7">
+                  Halaman Detail Activity
+                </h1>
                 {data.imageUrls && data.imageUrls.length > 0 && (
                   <div className="flex  items-center md:items-start md:gap-5">
                     <div className="mb-5 md:mb-0 flex flex-col md:flex-row gap-2">
@@ -68,9 +81,7 @@ const ActivityId = () => {
                         />
                       ))}
                       <div className="flex flex-col md:mx-5 w-full md:w-[300px] shadow-xl p-5 md:p-7 bg-blue-500 rounded-lg mt-5 md:mt-0 mx-auto">
-                        <h3 className="text-lg">
-                          Title: {data.title}
-                        </h3>
+                        <h3 className="text-lg">Title: {data.title}</h3>
                         <p>{`Price : ${formatToIDR(data.price)}`}</p>
                         <p>{`Price Discount : ${formatToIDR(
                           data?.price_discount
@@ -79,7 +90,9 @@ const ActivityId = () => {
                           Description: {data.description}
                         </p>
                         <p>{`Price : ${formatToIDR(data.price)}`}</p>
-                        <p>{`Discount : ${formatToIDR(data.price_discount)}`}</p>
+                        <p>{`Discount : ${formatToIDR(
+                          data.price_discount
+                        )}`}</p>
                         <div className="flex gap-5 text-sm  md:gap-2 mt-5 ">
                           <Link to={"/"}>
                             <button className="flex p-1 justify-center  bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 w-[120px] rounded-full text-center ">

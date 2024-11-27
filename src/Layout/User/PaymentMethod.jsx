@@ -6,6 +6,7 @@ import Navbar from "../../components/General/Navbar";
 import { useNavigate } from "react-router-dom";
 import { fetchCreateTransaction } from "../../reducer/transactionSlice";
 import Footer from "../../components/General/Footer";
+import Swal from "sweetalert2";
 
 const PaymentMethod = () => {
   const location = useLocation();
@@ -25,31 +26,43 @@ const PaymentMethod = () => {
     setSelectedMethod(methodId);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage("");
+ const handleSubmit = (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setErrorMessage("");
 
-    // Dispatch API Create Transaction
-    dispatch(
-      fetchCreateTransaction({
-        cartIds: selectedCartItems.map((item) => item.id),
-        paymentMethodId: selectedMethod,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        navigate("/my-transactions");
-      })
-      .catch((error) => {
-        setErrorMessage(
-          "Choose Payment Method "  || "Kesalahan server."
-        );
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Are you sure you want to create this transaction?",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, create it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      dispatch(
+        fetchCreateTransaction({
+          cartIds: selectedCartItems.map((item) => item.id),
+          paymentMethodId: selectedMethod,
+        })
+      )
+        .unwrap()
+        .then(() => {
+          navigate("/my-transactions");
+        })
+        .catch((error) => {
+          setErrorMessage("Choose Payment Method " || "Kesalahan server.");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+
+      setIsLoading(false);
+    }
+  });
+};
 
   const formatToIDR = (amount) => {
     return new Intl.NumberFormat("id-ID", {
