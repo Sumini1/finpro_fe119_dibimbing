@@ -5,6 +5,7 @@ import { fetchGetLoggedUser } from "../../reducer/loggedUserSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearchQuery } from "../../reducer/searchSlice";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const NavbarAdmin = () => {
   const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
   const avatarUrl = useSelector(
@@ -43,7 +44,9 @@ const NavbarAdmin = () => {
 
   return (
     <div className="flex items-center justify-between p-2">
-      <div className="text-2xl">Holidays.In</div>
+      <Link to={"/"}>
+        <div className="text-2xl">Holidays.In</div>
+      </Link>
       <div className="flex items-center">
         <div className="relative ">
           <CiSearch className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-500" />

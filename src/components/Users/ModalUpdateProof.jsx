@@ -1,85 +1,95 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchTransactionUpdate, fetchMyTransactions } from "../../reducer/transactionSlice";
-
+import {
+  fetchTransactionUpdate,
+  fetchMyTransactions,
+} from "../../reducer/transactionSlice";
+import axios from "axios";
 
 const ModalUpdateProof = ({ toggleModalOpen, transactionId }) => {
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    proofPaymentUrl: "",
-  });
-
+  const [fileImage, setFileImage] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFileImage(file);
+    setErrorMessage(""); 
   };
 
-
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.proofPaymentUrl.trim()) {
-      setErrorMessage("Proof of Payment URL is required!");
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!fileImage) {
+      setErrorMessage("Please select an image file.");
       return;
     }
 
     setIsLoading(true);
 
-    dispatch(
-      fetchTransactionUpdate({
-        id: transactionId,
-        proofPaymentUrl: formData.proofPaymentUrl,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        dispatch(fetchMyTransactions());
-        toggleModalOpen();
-      })
-      .catch((error) => {
-        setErrorMessage(error.message || "Something went wrong!");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    try {
+      const formData = new FormData();
+      formData.append("image", fileImage);
+
+      const uploadResponse = await axios.post(
+        "https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            apikey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      const proofPaymentUrl = uploadResponse.data.url;
+
+      // Kirim URL ke backend untuk update transaksi
+      await dispatch(
+        fetchTransactionUpdate({
+          id: transactionId,
+          proofPaymentUrl, 
+        })
+      ).unwrap();
+
+      // Refresh transaksi dan tutup modal
+      dispatch(fetchMyTransactions());
+      toggleModalOpen();
+    } catch (error) {
+      setErrorMessage(
+        error.response?.data?.message || "Failed to update proof of payment."
+      );
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative m-2 p-4 bg-white rounded-lg shadow w-[500px]">
-        <div className="flex items-center justify-between pb-3 mb-4 border-b">
+        <div className="flex items-center justify-between pb-3 mb-4 ">
           <h3 className="text-lg font-semibold">Update Proof of Payment</h3>
           <button
             onClick={toggleModalOpen}
-            className="text-gray-400 hover:text-gray-900"
+            className="text-gray-400 hover:text-gray-900\\"
           >
             &times;
           </button>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label
-              htmlFor="proofPaymentUrl"
-              className="block text-sm font-medium text-gray-900"
-            >
-              Proof of Payment URL
-            </label>
+          <div className="w-full md:w-[300px]">
             <input
-              type="text"
+              type="file"
               id="proofPaymentUrl"
               name="proofPaymentUrl"
-              value={formData.proofPaymentUrl}
-              onChange={handleChange}
-              className="w-full p-2 border rounded text-black"
-              placeholder="Enter proof payment URL"
+              onChange={handleFileChange}
+              className="w-full p-2 border rounded text-black md:w-[200px]"
             />
           </div>
 
