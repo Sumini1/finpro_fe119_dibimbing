@@ -45,12 +45,12 @@ const NavbarAdmin = () => {
     <div className="flex items-center justify-between p-2">
       <div className="text-2xl">Holidays.In</div>
       <div className="flex items-center">
-        <div className="relative">
+        <div className="relative ">
           <CiSearch className="absolute top-1/2 left-2 transform -translate-y-1/2 text-gray-500" />
           <input
             type="text"
-            placeholder="Search..."
-            className="pl-8 p-1 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-black"
+            placeholder="Search... Banner, Promo, dll"
+            className="pl-12 p-2  border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300 text-gray-800"
             onChange={handleSearch}
           />
         </div>

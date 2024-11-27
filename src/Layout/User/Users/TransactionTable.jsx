@@ -18,6 +18,7 @@ const TransactionTable = () => {
   const transactionsPerPage = 10;
   const [searchQueryAdmin, setSearchQueryAdmin] = useState("");
 
+  // filter query
   const filteredTransactionAdmin = transactions.filter((transaction) =>
     transaction.transaction_items?.some((item) =>
       item.title.toLowerCase().includes(searchQueryAdmin.toLowerCase())
