@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTransaction } from "../../../reducer/transactionSlice";
+import { fetchTransaction } from "../../reducer/transactionSlice";
 import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import ModalupdateStatus from "../../../components/Users/ModalUpdateStatus";
+import ModalupdateStatus from "../../components/Users/ModalUpdateStatus";
 
 const TransactionTable = () => {
   const dispatch = useDispatch();

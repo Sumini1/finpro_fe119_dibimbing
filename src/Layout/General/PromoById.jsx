@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchGetPromoById } from "../../../reducer/promoByIdSlice";
+import { fetchGetPromoById } from "../../reducer/promoByIdSlice";
 import { useParams, Link } from "react-router-dom";
-import Navbar from "../../../components/General/Navbar";
-import Footer from "../../../components/General/Footer";
+import Navbar from "../../components/General/Navbar";
+import Footer from "../../components/General/Footer";
 
 const PromoById = () => {
   const { id } = useParams();

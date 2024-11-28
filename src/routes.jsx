@@ -7,7 +7,7 @@ import BannerById from "./Layout/General/BannerById";
 import AllUser from "./Layout/Admin/AllUser";
 import LoggedUser from "./Layout/User/Users/LoggedUser";
 import Promo from "./Layout/General/Promo";
-import PromoById from "./Layout/User/Users/PromoById";
+import PromoById from "./Layout/General/PromoById";
 import BannerUser from "./Layout/Admin/BannerUser";
 import Category from "./Layout/General/Category";
 import CategoryById from "./Layout/General/CategoryById";
@@ -27,7 +27,7 @@ import DetailActivityAdmin from "./Layout/Admin/DetailActivityAdmin";
 import CartPage from "./Layout/User/Users/CartPage";
 import ErrorPage from "./pages/ErrorPage";
 import ListTransactions from "./Layout/User/Users/ListTransactions";
-import TransactionTable from "./Layout/User/Users/TransactionTable";
+import TransactionTable from "./Layout/Admin/TransactionTable";
 import DetailTransactionAdmin from "./Layout/Admin/DetailTransactionAdmin";
 import MyTransactions from "./Layout/User/Users/MyTransactions";
 import Faq from "./components/General/Faq";
@@ -104,11 +104,7 @@ export const routes = [
   },
   {
     path: "/activity/:id",
-    element: (
-      
-        <ActivityId />
-     
-    ),
+    element: <ActivityId />,
   },
 
   {
