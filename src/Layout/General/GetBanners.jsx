@@ -17,9 +17,9 @@ const GetBanners = () => {
 
   const { isLoading, data } = useSelector((state) => state.banner);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -35,44 +35,48 @@ const GetBanners = () => {
 
   return (
     <div className="relative bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600">
-      <TECarousel showControls={false} showIndicators={false} ride="carousel">
-        <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
-          {data && data.length > 0 ? (
-            data.map((banner, index) => (
-              <TECarouselItem
-                key={banner.id}
-                itemID={index + 1}
-                className={`relative float-left ${
-                  index === currentIndex ? "" : "hidden"
-                } -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none`}
-              >
-                <Link to={`/banner/${banner.id}`}>
-                  <div className="overflow-hidden rounded-md ">
-                    <img
-                      src={banner.imageUrl}
-                      className="block w-full h-[300px] rounded-md md:h-[500px]"
-                      alt={banner.name}
-                    />
-                  </div>
-                </Link>
-                {/* Deskripsi Banner */}
-                <div className="absolute top-0 p-5 mb-2 text-left text-white mt-36 left-5 md:block md:top-36 md:text-xl">
-                  <p className="mb-3 text-xl font-extrabold md:text-3xl md:mb-5">
-                    Lets Explore The World
-                  </p>
-                  <Link to={"/activity"}>
-                    <button className="px-4 py-2 mb-2 font-bold text-black bg-white rounded md:mb-7">
-                      Book Now
-                    </button>
+      {isLoading ? (
+        <div className="relative w-full overflow-hidden after:clear-both after:block after:content-[''] h-[300px] md:h-[500px]  bg-gray-400 animate-pulse"></div>
+      ) : (
+        <TECarousel showControls={false} showIndicators={false} ride="carousel">
+          <div className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+            {data && data.length > 0 ? (
+              data.map((banner, index) => (
+                <TECarouselItem
+                  key={banner.id}
+                  itemID={index + 1}
+                  className={`relative float-left ${
+                    index === currentIndex ? "" : "hidden"
+                  } -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none`}
+                >
+                  <Link to={`/banner/${banner.id}`}>
+                    <div className="overflow-hidden rounded-md ">
+                      <img
+                        src={banner.imageUrl}
+                        className="block w-full h-[300px] rounded-md md:h-[500px]"
+                        alt={banner.name}
+                      />
+                    </div>
                   </Link>
-                </div>
-              </TECarouselItem>
-            ))
-          ) : (
-            <div>No banners available</div>
-          )}
-        </div>
-      </TECarousel>
+                  {/* Deskripsi Banner */}
+                  <div className="absolute top-0 p-5 mb-2 text-left text-white mt-36 left-5 md:block md:top-36 md:text-xl">
+                    <p className="mb-3 text-xl font-extrabold md:text-3xl md:mb-5">
+                      Lets Explore The World
+                    </p>
+                    <Link to={"/activity"}>
+                      <button className="px-4 py-2 mb-2 font-bold text-black bg-white rounded md:mb-7">
+                        Book Now
+                      </button>
+                    </Link>
+                  </div>
+                </TECarouselItem>
+              ))
+            ) : (
+              <div>No banners available</div>
+            )}
+          </div>
+        </TECarousel>
+      )}
 
       {/* Kontrol Panah */}
       <div className="absolute left-12  md:left-10 transform -translate-y-1/2 top-[270px] md:top-[450px]">

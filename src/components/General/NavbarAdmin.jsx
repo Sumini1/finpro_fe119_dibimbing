@@ -45,7 +45,7 @@ const NavbarAdmin = () => {
   return (
     <div className="flex items-center justify-between p-2">
       <Link to={"/"}>
-        <div className="text-2xl">Holidays.In</div>
+        <div className="text-3xl ">Holidays.In</div>
       </Link>
       <div className="flex items-center">
         <div className="relative ">

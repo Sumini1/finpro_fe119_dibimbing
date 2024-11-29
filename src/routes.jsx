@@ -193,10 +193,7 @@ export const routes = [
       </ProtectedRouteUser>
     ),
   },
-  {
-    path: "*",
-    element: <ErrorPage />,
-  },
+
   {
     path: "/list-transactions",
     element: (
@@ -230,5 +227,9 @@ export const routes = [
         <MyTransactions />
       </ProtectedRouteUser>
     ),
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ];
